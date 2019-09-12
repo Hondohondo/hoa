@@ -19,5 +19,6 @@
       </ul>
     </li>
   </ul>
+</br>
 <h4>delete_me.txt</h4>
-  <p>One interesting feature of Git and Github is that empty directories are forbidden. This means if there is an instance where a file is nested within a part-whole hierarchy, a "shortcut" is automatically presented leading to the next folder with a file in it. To prevent this and allow logical file path navigation, delete_me.txt folders have been created in directories which would otherwise be empty. 
+<p>One interesting feature of Git and Github is that empty directories are forbidden. This means if there is an instance where a file is nested within a part-whole hierarchy, a "shortcut" is automatically presented leading to the next folder with a file in it. To prevent this and allow logical file path navigation, delete_me.txt folders have been created in directories which would otherwise be empty. </p>
