@@ -1,7 +1,7 @@
 # Backend Universal Conventions
 
 <h4>Horizontally Scalable</h4>
-<p>The backend is designed to be horizontally scalable. As such, the backend file-structure system must be coordinated in order to maintain its integrity. Each new feature folder must have the following folders (Note this is something a Dev-Ops team would automate):<p>
+<p>The backend is designed to be horizontally scalable. As such, the backend file-structure system must be coordinated in order to maintain its integrity. Each new feature folder must have the following folders (Note this is something a Dev-Ops team would automate):</p>
   <ul>
     <li>
       /NAME/_application
@@ -19,3 +19,5 @@
       </ul>
     </li>
   </ul>
+<h4>delete_me.txt</h4>
+  <p>One interesting feature of Git and Github is that empty directories are forbidden. This means if there is an instance where a file is nested within a part-whole hierarchy, a "shortcut" is automatically presented leading to the next folder with a file in it. To prevent this and allow logical file path navigation, delete_me.txt folders have been created in directories which would otherwise be empty. 
