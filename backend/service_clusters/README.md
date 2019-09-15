@@ -3,4 +3,4 @@
 categorical microservices. 
 </br>
 </br>
-For example, Utility is the categorical archetype for collections of services such as Auth_Service or Notification_Service, in the Utility_Service_Cluister.</p>
+For example, Utility is the categorical archetype for collections of services such as <i>Auth_Service</i> or <i>Notification_Service</i>, in the <i>Utility_Service_Cluister</i>.</p>
