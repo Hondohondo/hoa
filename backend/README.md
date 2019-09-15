@@ -3,6 +3,8 @@
 ![alt text](https://raw.githubusercontent.com/Hondohondo/hoa/master/backend/back-end_architecture.png)
 </p>
 
+<img src="https://raw.githubusercontent.com/Hondohondo/hoa/master/backend/back-end_architecture.png" width="500">
+
 # Backend Universal Conventions
 
 <h4>Horizontally Scalable</h4>
