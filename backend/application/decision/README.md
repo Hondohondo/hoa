@@ -1,1 +1,2 @@
-# This is where the Chain of Responsibility Delegator will reside
+# Chain of Responsibility Delegator
+This is where it will reside
