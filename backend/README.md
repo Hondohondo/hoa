@@ -1,5 +1,5 @@
 # Current Backend Architecture
-<img src="https://raw.githubusercontent.com/Hondohondo/hoa/master/backend/back-end_architecture.png" width="2000">
+<img src="https://raw.githubusercontent.com/Hondohondo/hoa/master/backend/back-end_architecture.png" width="5000">
 
 # Backend Universal Conventions
 
