@@ -24,7 +24,7 @@ public abstract class Ticket {
 	private volatile String memberID;
 	private volatile String status;
 	private volatile boolean isActive;
-	private final String connectionString = "jdbc:sqlserver://nealkdbserver.database.windows.net:1433;database=UtilityDB;user=neal@nealkdbserver;password=Steel2727;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
+	private final String connectionString = "NULL";
 	private final SqlOperationType operation;
 	
 	protected Ticket(SqlOperationType operation) {
