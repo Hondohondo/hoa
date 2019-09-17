@@ -1,4 +1,4 @@
-package hoa.api.services.ticket.db_direct_access_service_proxy;
+package hoa.api.services.ticket.microservices.ticket_crud_service;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 
 //import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+
+import hoa.api.services.SqlOperationType;
 
 
 //import com.microsoft.sqlserver.jdbc.SQLServerException;
@@ -163,3 +165,4 @@ public abstract class Ticket {
 	}
 
 }
+

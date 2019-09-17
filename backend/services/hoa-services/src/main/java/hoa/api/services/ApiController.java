@@ -4,9 +4,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import hoa.api.services.ticket.db_direct_access_service_proxy.Ticket;
-import hoa.api.services.ticket.db_direct_access_service_proxy.TicketDBDirectAccessServiceProxyFactory;
-import hoa.api.services.ticket.db_direct_access_service_proxy.TicketSelect;
+import hoa.api.services.ticket.microservices.ticket_crud_service.Ticket;
+import hoa.api.services.ticket.microservices.ticket_crud_service.TicketCRUDService_CRUDFactory;
 
 /**
  * All new request maps must have the following comments:
@@ -21,15 +20,15 @@ import hoa.api.services.ticket.db_direct_access_service_proxy.TicketSelect;
 public class ApiController {
 	
 	/**
-	 * SERVICE: Ticket/db_direct_access_service_proxy
+	 * SERVICE: ticket/microservices/ticket_crud_service/read
 	 * TYPE: GET
 	 * DESCRIPTION: Individual record retrieval from TicketDB by TicketID number.
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping("/services/ticket/db_direct_access_service_proxy")
+	@RequestMapping("/services/ticket/microservices/ticket_crud_service/read")
 	public Ticket get (@RequestParam(value="id") int id) {
-		return new TicketDBDirectAccessServiceProxyFactory().init(id);
+		return new TicketCRUDService_CRUDFactory().init(id);
 	}
 
 }

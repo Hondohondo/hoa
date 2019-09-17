@@ -1,4 +1,4 @@
-package hoa.api.services.ticket.db_direct_access_service_proxy;
+package hoa.api.services.ticket.microservices.ticket_crud_service;
 
 public enum TicketColumns {
 	

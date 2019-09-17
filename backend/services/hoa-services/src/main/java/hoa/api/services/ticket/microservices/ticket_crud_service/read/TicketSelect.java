@@ -1,8 +1,11 @@
-package hoa.api.services.ticket.db_direct_access_service_proxy;
+package hoa.api.services.ticket.microservices.ticket_crud_service.read;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import hoa.api.services.SqlOperationType;
+import hoa.api.services.ticket.microservices.ticket_crud_service.Ticket;
 
 public class TicketSelect extends Ticket{
 	
