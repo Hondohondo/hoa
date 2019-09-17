@@ -1,13 +1,13 @@
-package com.kumar.neal;
+package hoa.api.services;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Driver {
+public class ServiceDriver {
 	
 	public static void main(String[] args) {
-		SpringApplication.run(Driver.class, args);
+		SpringApplication.run(ServiceDriver.class, args);
 	}
 
 }
