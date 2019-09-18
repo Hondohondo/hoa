@@ -3,6 +3,7 @@ package hoa.api.services.ticket.microservices.ticket_crud_service;
 import hoa.api.services.ticket.microservices.CRUDService_CRUDFactory;
 import hoa.api.services.ticket.microservices.ticket_crud_service.create.TicketInsert;
 import hoa.api.services.ticket.microservices.ticket_crud_service.read.TicketSelect;
+import hoa.api.services.ticket.microservices.ticket_crud_service.read.TicketGetAll;
 
 public class TicketCRUDService_CRUDFactory extends CRUDService_CRUDFactory{
 	
