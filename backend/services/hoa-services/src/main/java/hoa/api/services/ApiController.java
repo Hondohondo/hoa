@@ -1,7 +1,10 @@
 package hoa.api.services;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import hoa.api.services.ticket.microservices.ticket_crud_service.Ticket;
@@ -27,10 +30,29 @@ public class ApiController {
 	 * @param id
 	 * @return
 	 */
-	//@RequestMapping("/services/ticket/microservices/ticket_crud_service/read")
-	@RequestMapping(TicketCRUDService_Constants.READ_BY_TICKETID)
-	public Ticket get (@RequestParam(value="id") int id) {
+	@RequestMapping(method = RequestMethod.GET, value = TicketCRUDService_Constants.READ_BY_TICKETID)
+	@ResponseStatus(HttpStatus.OK)
+	public Ticket retrierveByTicketId (@RequestParam(value="id") int id) {
 		return new TicketCRUDService_CRUDFactory().init(id);
+	}
+	
+	/**
+	 * SERVICE: ticket/microservices/ticket_crud_service/
+	 * TYPE: GET
+	 * DESCRIPTION: Individual record retrieval from TicketDB by TicketID number.
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(TicketCRUDService_Constants.CREATE)
+	public Ticket insertNew (@RequestParam(value="subject") String subject,
+							 @RequestParam(value="ticketMessage") String ticketMessage,
+							 @RequestParam(value="isActive") boolean isActive,
+							 @RequestParam(value="createdBy") String createdBy,
+							 @RequestParam(value="name") String name,
+							 @RequestParam(value="phoneNumber") String phoneNumber,
+							 @RequestParam(value="email") String email,
+							 @RequestParam(value="memberId") String memberId) {
+		return new TicketCRUDService_CRUDFactory().init(subject, ticketMessage, isActive, name, phoneNumber, email, memberId);
 	}
 	
 	

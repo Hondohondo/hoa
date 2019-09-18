@@ -3,6 +3,8 @@ package hoa.api.services;
 public enum SqlOperationType {
 	
 	insert,
-	select
+	select,
+	update,
+	delete
 
 }
