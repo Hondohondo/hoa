@@ -154,7 +154,7 @@ public abstract class Ticket {
 	/**
 	 * @return the isActive
 	 */
-	public synchronized boolean isActive() {
+	public synchronized boolean getIsActive() {
 		return isActive;
 	}
 	
@@ -163,6 +163,83 @@ public abstract class Ticket {
 	 */
 	public synchronized String getStatus() {
 		return status;
+	}
+
+	/**
+	 * @param ticketId the ticketId to set
+	 */
+	protected synchronized void setTicketId(int ticketId) {
+		this.ticketId = ticketId;
+	}
+
+	/**
+	 * @param subject the subject to set
+	 */
+	protected synchronized void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	/**
+	 * @param message the message to set
+	 */
+	protected synchronized void setMessage(String message) {
+		this.message = message;
+	}
+
+	/**
+	 * @param createdBy the createdBy to set
+	 */
+	protected synchronized void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	protected synchronized void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * @param phoneNumber the phoneNumber to set
+	 */
+	protected synchronized void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	/**
+	 * @param email the email to set
+	 */
+	protected synchronized void setEmail(String email) {
+		this.email = email;
+	}
+
+	/**
+	 * @param memberID the memberID to set
+	 */
+	protected synchronized void setMemberID(String memberID) {
+		this.memberID = memberID;
+	}
+
+	/**
+	 * @param status the status to set
+	 */
+	protected synchronized void setStatus(String status) {
+		this.status = status;
+	}
+
+	/**
+	 * @param isActive the isActive to set
+	 */
+	protected synchronized void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+	
+	/**
+	 * @param isActive the isActive to set
+	 */
+	protected synchronized void setMemberId(String memeberId) {
+		this.memberID = memeberId;
 	}
 
 }
