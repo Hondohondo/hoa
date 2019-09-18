@@ -10,6 +10,10 @@ public class TicketCRUDService_CRUDFactory extends CRUDService_CRUDFactory{
 		return new TicketSelect(ticketId);
 	}
 	
+	public Ticket init(){
+		return new TicketGetAll();
+	}
+	
 	public Ticket init(String subject, String ticketMessage, boolean isActive, String name, String phoneNumber, String email, String memberId) {
 		return new TicketInsert(subject, ticketMessage, isActive, name, phoneNumber, email, memberId);
 	}

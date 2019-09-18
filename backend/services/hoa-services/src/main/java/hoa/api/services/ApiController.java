@@ -35,6 +35,18 @@ public class ApiController {
 	public Ticket retrierveByTicketId (@RequestParam(value="id") int id) {
 		return new TicketCRUDService_CRUDFactory().init(id);
 	}
+
+	/**
+	 * SERVICE: ticket/microservices/ticket_crud_service/read
+	 * TYPE: GET
+	 * DESCRIPTION: Bulk retreival. 
+	 * @return
+	 */
+	@RequestMapping(method = RequestMethod.GET, value = TicketCRUDService_Constants.READ_ALL)
+	@ResponseStatus(HttpStatus.OK)
+	public Ticket retrierveByAll () {
+		return new TicketCRUDService_CRUDFactory().init();
+	}
 	
 	/**
 	 * SERVICE: ticket/microservices/ticket_crud_service/
