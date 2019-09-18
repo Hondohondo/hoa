@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import hoa.api.services.ticket.microservices.ticket_crud_service.Ticket;
 import hoa.api.services.ticket.microservices.ticket_crud_service.TicketCRUDService_CRUDFactory;
+import hoa.api.services.ticket.microservices.ticket_crud_service.TicketCRUDService_Constants;
 
 /**
  * All new request maps must have the following comments:
@@ -26,9 +27,12 @@ public class ApiController {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping("/services/ticket/microservices/ticket_crud_service/read")
+	//@RequestMapping("/services/ticket/microservices/ticket_crud_service/read")
+	@RequestMapping(TicketCRUDService_Constants.READ_BY_TICKETID)
 	public Ticket get (@RequestParam(value="id") int id) {
 		return new TicketCRUDService_CRUDFactory().init(id);
 	}
+	
+	
 
 }

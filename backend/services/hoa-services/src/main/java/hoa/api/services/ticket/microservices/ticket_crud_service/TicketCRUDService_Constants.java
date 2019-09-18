@@ -1,7 +1,9 @@
 package hoa.api.services.ticket.microservices.ticket_crud_service;
 
-public class TicketCRUDService_Constants{
+import hoa.api.services.ServiceConstants;
+
+public abstract class TicketCRUDService_Constants extends ServiceConstants{
 	
-	public static final String READ_BY_TICKETID = "http://hoa.api.ngrok.io/services/ticket/microservices/ticked_crud_service/read?id=1000";
+	public static final String READ_BY_TICKETID = "/services/ticket/microservices/ticket_crud_service/read";
 
 }
