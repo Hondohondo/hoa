@@ -5,6 +5,16 @@ package hoa.api.services.ticket.microservices;
  * @author Owner
  *
  */
-public abstract class CRUDService_CRUDFactory {
+public class CRUDService_CRUDFactory {
+	
+	private final String serviceHomeMessage;
+	
+	public CRUDService_CRUDFactory() {
+		serviceHomeMessage = "Welcome to HoA REST API Services Home. See service index in ApiController.java for navigation guide.";
+	}
+	
+	public String getServiceHomeMessage() {
+		return serviceHomeMessage;
+	}
 
 }

@@ -3,7 +3,9 @@ package hoa.api.services.ticket.microservices.ticket_crud_service.create;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Observable;
 
+import hoa.api.services.Services;
 import hoa.api.services.SqlOperationType;
 import hoa.api.services.ticket.microservices.ticket_crud_service.Ticket;
 import hoa.api.services.ticket.microservices.ticket_crud_service.TicketColumns;
@@ -63,6 +65,12 @@ public class TicketInsert extends Ticket{
 																												+ this.getName() + "','"
 																														+ this.getEmail() + "','"
 																																+ this.getMemberID() + "');";
+	}
+
+	@Override
+	public Services getServiceName() {
+		// TODO Auto-generated method stub
+		return Services.TicketInsert;
 	}
 
 }

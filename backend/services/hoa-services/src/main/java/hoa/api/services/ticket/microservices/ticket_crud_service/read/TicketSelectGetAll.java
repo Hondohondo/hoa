@@ -3,19 +3,21 @@ package hoa.api.services.ticket.microservices.ticket_crud_service.read;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Observable;
 
+import hoa.api.services.Services;
 import hoa.api.services.SqlOperationType;
 import hoa.api.services.ticket.microservices.ticket_crud_service.Ticket;
 
-public class TicketGetAll extends Ticket{
+public class TicketSelectGetAll extends Ticket{
 	
 //	public TicketSelect(int ticketId) {
 //		this.ticketId = ticketId;
 //		this.subject = super.getSubject();
 //	}
 	
-	public TicketGetAll() {
-		super(SqlOperationType.select);
+	public TicketSelectGetAll() {
+		super(SqlOperationType.select_get_all);
 		super.queryDb();
 	}
 
@@ -34,6 +36,19 @@ public class TicketGetAll extends Ticket{
 	@Override
 	protected String getQuery() {
 		// TODO Auto-generated method stub
-		return "SELECT * FROM Ticket WHERE IsActive = 1";
+		return "SELECT * FROM Ticket";
 	}
+
+	@Override
+	public Services getServiceName() {
+		// TODO Auto-generated method stub
+		return Services.TicketGetAll;
+	}
+
+//	@Override
+//	public void update(Observable obsv, Object obj) {
+//		// TODO Auto-generated method stub
+//		if(obj.equals(Services.TicketGetAll))
+//			this.toJson();
+//	}
 }
