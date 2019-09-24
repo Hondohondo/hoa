@@ -7,9 +7,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Map;
 import java.util.Observer;
+
+import org.json.simple.JSONArray;
 
 import com.github.cliftonlabs.json_simple.JsonObject;
 import com.github.cliftonlabs.json_simple.Jsonable;
@@ -23,16 +27,18 @@ import hoa.api.services.SqlOperationType;
 import hoa.api.services.ticket.microservices.ticket_crud_service.read.TicketSelect;
 
 /**
- * Returns a Ticket object. Jsonable is similar to Serializable for Java Beans, but for JSON.
+ * Returns a Ticket object. Jsonable is similar to Serializable for Java Beans,
+ * but for JSON. </br>
  * </br>
- * </br> {@link #ticketId} = TicketID in UtilityDB.TICKET
- * </br> etc... 
- * </br> TODO: Finish this class documentation.
+ * {@link #ticketId} = TicketID in UtilityDB.TICKET </br>
+ * etc... </br>
+ * TODO: Finish this class documentation.
+ * 
  * @author Owner
  *
  */
-public abstract class Ticket extends Service{
-	
+public abstract class Ticket extends Service {
+
 	protected volatile int ticketId;
 	protected volatile String subject;
 	private volatile String message;
@@ -46,7 +52,8 @@ public abstract class Ticket extends Service{
 	private volatile boolean isActive;
 	private final String connectionString = ServiceConstants.CONNECTION_STRING;
 	protected final SqlOperationType operation;
-	private Map<SqlOperationType, Ticket> ticketTable; 
+	private Map<SqlOperationType, Ticket> ticketTable;
+
 	/**
 	 * @return the operation
 	 */
@@ -54,18 +61,16 @@ public abstract class Ticket extends Service{
 		return operation;
 	}
 
-	
-	
 	protected Ticket(SqlOperationType operation) {
 		this.operation = operation;
-		//ticketTable = new Hashtable<SqlOperationType, Ticket>();
-		//ticketTable.put(SqlOperationType.select, new TicketSelect());
-		//queryDb();
+		// ticketTable = new Hashtable<SqlOperationType, Ticket>();
+		// ticketTable.put(SqlOperationType.select, new TicketSelect());
+		// queryDb();
 	}
-	
+
 	@Override
-	public void toJson(Writer writer) throws IOException{
-		//this.queryDb();
+	public void toJson(Writer writer) throws IOException {
+		// this.queryDb();
 		final JsonObject json = new JsonObject();
 		json.put("ticketId", this.getTicketId());
 		json.put("subject", this.getSubject());
@@ -78,134 +83,181 @@ public abstract class Ticket extends Service{
 		json.put("memberId", this.getMemberID());
 		json.toJson(writer);
 	}
-	
-	protected final String queryDb() {
-		executeQuery(this.getOperation());
+
+	protected String queryDb() {
+		if (this.getOperation().equals(SqlOperationType.select)) {
+			return executeQuerySelect(this.getOperation());
+		}
+//		else if(this.getOperation().equals(SqlOperationType.select_get_all)) {
+//			return executeQuerySelectGetAll();
+//		}
+		return executeQuerySelect(this.getOperation());
+//		final String sql = getQuery();
+//		try {
+//			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+//			Connection connection = DriverManager.getConnection(connectionString);
+//			System.out.println("Connected.");
+//			PreparedStatement stmt = connection.prepareStatement(sql);
+//			if(operation.equals(SqlOperationType.insert)){
+//				stmt.executeUpdate();
+//				status = "success";
+//			} else if(operation.equals(SqlOperationType.select)) {
+//				ResultSet rs = stmt.executeQuery();
+//				status = "null data.";
+//				if(rs != null) {
+//					status = "success";
+//					while(rs.next()) {				
+//						this.subject = rs.getString(TicketColumns.Subject.toString());
+//						this.message = rs.getString(TicketColumns.TicketMessage.toString());
+//						this.isActive = (rs.getInt(TicketColumns.IsActive.toString()) == 1) ? true : false;
+//						this.createdBy = rs.getString(TicketColumns.CreatedBy.toString());
+//						this.createdDate = rs.getString(TicketColumns.CreatedDate.toString());
+//						this.name = rs.getString(TicketColumns.Name.toString());
+//						this.phoneNumber = rs.getString(TicketColumns.PhoneNumber.toString());
+//						this.memberID = rs.getString(TicketColumns.MemberID.toString());
+//					}
+//				}
+//			}
+//		} 
+//		catch (SQLServerException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} 
+//		catch (Exception ex) {
+//			// TODO Auto-generated catch block
+//			ex.printStackTrace();
+//		} 
+//		return status;
+	}
+
+	protected JsonObject queryDbGetAll() {
+		return executeQuerySelectGetAll();
+	}
+
+	private String executeQuerySelect(SqlOperationType operation) {
+		// TODO Auto-generated method stub
+		if (this.getOperation().equals(SqlOperationType.select)) {
+			final String sql = getQuery();
+			try {
+				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+				Connection connection = DriverManager.getConnection(connectionString);
+				System.out.println("Connected.");
+				PreparedStatement stmt = connection.prepareStatement(sql);
+				if (operation.equals(SqlOperationType.insert)) {
+					stmt.executeUpdate();
+					status = "success";
+				} else if (operation.equals(SqlOperationType.select)) {
+					ResultSet rs = stmt.executeQuery();
+					status = "null data.";
+					if (rs != null) {
+						status = "success";
+						while (rs.next()) {
+							this.subject = rs.getString(TicketColumns.Subject.toString());
+							this.message = rs.getString(TicketColumns.TicketMessage.toString());
+							this.isActive = (rs.getInt(TicketColumns.IsActive.toString()) == 1) ? true : false;
+							this.createdBy = rs.getString(TicketColumns.CreatedBy.toString());
+							this.createdDate = rs.getString(TicketColumns.CreatedDate.toString());
+							this.name = rs.getString(TicketColumns.Name.toString());
+							this.phoneNumber = rs.getString(TicketColumns.PhoneNumber.toString());
+							this.memberID = rs.getString(TicketColumns.MemberID.toString());
+						}
+					}
+				}
+			} catch (SQLServerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception ex) {
+				// TODO Auto-generated catch block
+				ex.printStackTrace();
+			}
+			return status;
+		} else if (this.getOperation().equals(SqlOperationType.select_get_all)) {
+			final String sql = getQuery();
+			try {
+				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+				Connection connection = DriverManager.getConnection(connectionString);
+				System.out.println("Connected.");
+				PreparedStatement stmt = connection.prepareStatement(sql);
+				if (operation.equals(SqlOperationType.insert)) {
+					stmt.executeUpdate();
+					status = "success";
+				} else if (operation.equals(SqlOperationType.select)) {
+					ResultSet rs = stmt.executeQuery();
+					status = "null data.";
+					if (rs != null) {
+						status = "success";
+						while (rs.next()) {
+							this.subject = rs.getString(TicketColumns.Subject.toString());
+							this.message = rs.getString(TicketColumns.TicketMessage.toString());
+							this.isActive = (rs.getInt(TicketColumns.IsActive.toString()) == 1) ? true : false;
+							this.createdBy = rs.getString(TicketColumns.CreatedBy.toString());
+							this.createdDate = rs.getString(TicketColumns.CreatedDate.toString());
+							this.name = rs.getString(TicketColumns.Name.toString());
+							this.phoneNumber = rs.getString(TicketColumns.PhoneNumber.toString());
+							this.memberID = rs.getString(TicketColumns.MemberID.toString());
+						}
+					}
+				}
+			} catch (SQLServerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception ex) {
+				// TODO Auto-generated catch block
+				ex.printStackTrace();
+			}
+			return status;
+		}
+
+		return "error.";
+	}
+
+	private JsonObject executeQuerySelectGetAll() {
 		final String sql = getQuery();
+		JsonObject json = new JsonObject();
+		List<JsonObject> jsonList = new ArrayList<JsonObject>();
+		
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			Connection connection = DriverManager.getConnection(connectionString);
 			System.out.println("Connected.");
 			PreparedStatement stmt = connection.prepareStatement(sql);
-			if(operation.equals(SqlOperationType.insert)){
-				stmt.executeUpdate();
+			ResultSet rs = stmt.executeQuery();
+			status = "null data.";
+			JSONArray ticketsJsonArray = new JSONArray();
+			
+			if (rs != null) {
 				status = "success";
-			} else if(operation.equals(SqlOperationType.select)) {
-				ResultSet rs = stmt.executeQuery();
-				status = "null data.";
-				if(rs != null) {
-					status = "success";
-					while(rs.next()) {				
-						this.subject = rs.getString(TicketColumns.Subject.toString());
-						this.message = rs.getString(TicketColumns.TicketMessage.toString());
-						this.isActive = (rs.getInt(TicketColumns.IsActive.toString()) == 1) ? true : false;
-						this.createdBy = rs.getString(TicketColumns.CreatedBy.toString());
-						this.createdDate = rs.getString(TicketColumns.CreatedDate.toString());
-						this.name = rs.getString(TicketColumns.Name.toString());
-						this.phoneNumber = rs.getString(TicketColumns.PhoneNumber.toString());
-						this.memberID = rs.getString(TicketColumns.MemberID.toString());
-					}
+				while (rs.next()) {
+					JsonObject ticket = new JsonObject();
+					this.subject = rs.getString(TicketColumns.Subject.toString());
+					ticket.put("subject", this.getSubject());
+					this.message = rs.getString(TicketColumns.TicketMessage.toString());
+					this.isActive = (rs.getInt(TicketColumns.IsActive.toString()) == 1) ? true : false;
+					this.createdBy = rs.getString(TicketColumns.CreatedBy.toString());
+					this.createdDate = rs.getString(TicketColumns.CreatedDate.toString());
+					this.name = rs.getString(TicketColumns.Name.toString());
+					this.phoneNumber = rs.getString(TicketColumns.PhoneNumber.toString());
+					this.memberID = rs.getString(TicketColumns.MemberID.toString());
+					
+					ticketsJsonArray.add(ticket);
 				}
+				json.put("tickets", ticketsJsonArray);
 			}
-		} 
-		catch (SQLServerException e) {
+
+		} catch (SQLServerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			// TODO Auto-generated catch block
 			ex.printStackTrace();
-		} 
-		return status;
-	}
-	
-	private String executeQuery(SqlOperationType operation2) {
-		// TODO Auto-generated method stub
-		if(this.getOperation().equals(SqlOperationType.select)) {
-			final String sql = getQuery();
-			try {
-				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-				Connection connection = DriverManager.getConnection(connectionString);
-				System.out.println("Connected.");
-				PreparedStatement stmt = connection.prepareStatement(sql);
-				if(operation.equals(SqlOperationType.insert)){
-					stmt.executeUpdate();
-					status = "success";
-				} else if(operation.equals(SqlOperationType.select)) {
-					ResultSet rs = stmt.executeQuery();
-					status = "null data.";
-					if(rs != null) {
-						status = "success";
-						while(rs.next()) {				
-							this.subject = rs.getString(TicketColumns.Subject.toString());
-							this.message = rs.getString(TicketColumns.TicketMessage.toString());
-							this.isActive = (rs.getInt(TicketColumns.IsActive.toString()) == 1) ? true : false;
-							this.createdBy = rs.getString(TicketColumns.CreatedBy.toString());
-							this.createdDate = rs.getString(TicketColumns.CreatedDate.toString());
-							this.name = rs.getString(TicketColumns.Name.toString());
-							this.phoneNumber = rs.getString(TicketColumns.PhoneNumber.toString());
-							this.memberID = rs.getString(TicketColumns.MemberID.toString());
-						}
-					}
-				}
-			} 
-			catch (SQLServerException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
-			catch (Exception ex) {
-				// TODO Auto-generated catch block
-				ex.printStackTrace();
-			} 
-			return status;
-		} else if(this.getOperation().equals(SqlOperationType.select_get_all)) {
-			final String sql = getQuery();
-			try {
-				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-				Connection connection = DriverManager.getConnection(connectionString);
-				System.out.println("Connected.");
-				PreparedStatement stmt = connection.prepareStatement(sql);
-				if(operation.equals(SqlOperationType.insert)){
-					stmt.executeUpdate();
-					status = "success";
-				} else if(operation.equals(SqlOperationType.select)) {
-					ResultSet rs = stmt.executeQuery();
-					status = "null data.";
-					if(rs != null) {
-						status = "success";
-						while(rs.next()) {				
-							this.subject = rs.getString(TicketColumns.Subject.toString());
-							this.message = rs.getString(TicketColumns.TicketMessage.toString());
-							this.isActive = (rs.getInt(TicketColumns.IsActive.toString()) == 1) ? true : false;
-							this.createdBy = rs.getString(TicketColumns.CreatedBy.toString());
-							this.createdDate = rs.getString(TicketColumns.CreatedDate.toString());
-							this.name = rs.getString(TicketColumns.Name.toString());
-							this.phoneNumber = rs.getString(TicketColumns.PhoneNumber.toString());
-							this.memberID = rs.getString(TicketColumns.MemberID.toString());
-						}
-					}
-				}
-			} 
-			catch (SQLServerException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
-			catch (Exception ex) {
-				// TODO Auto-generated catch block
-				ex.printStackTrace();
-			} 
-			return status;
 		}
-		
-		return "error.";
+		return null;
 	}
-
-
 
 	protected abstract ResultSet executeSql(PreparedStatement stmt);
-	
+
 	protected abstract String getQuery();
-	
+
 	/**
 	 * @return the ticketId
 	 */
@@ -233,7 +285,7 @@ public abstract class Ticket extends Service{
 	protected synchronized String getCreatedBy() {
 		return createdBy;
 	}
-	
+
 	/**
 	 * @return the createdDate
 	 */
@@ -275,14 +327,13 @@ public abstract class Ticket extends Service{
 	protected synchronized boolean getIsActive() {
 		return isActive;
 	}
-	
+
 	/**
 	 * @return the status
 	 */
 	protected synchronized String getStatus() {
 		return status;
 	}
-	
 
 	/**
 	 * @param ticketId the ticketId to set
@@ -353,7 +404,7 @@ public abstract class Ticket extends Service{
 	protected synchronized void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
-	
+
 	/**
 	 * @param isActive the isActive to set
 	 */
@@ -369,4 +420,3 @@ public abstract class Ticket extends Service{
 	}
 
 }
-
