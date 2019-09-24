@@ -18,7 +18,7 @@ public class TicketCRUDService_CRUDFactory extends CRUDService_CRUDFactory{
 	
 	public String init(){
 		TicketSelectGetAll ticketSelectGetAll = new TicketSelectGetAll();
-		String json = Jsoner.serialize(ticketSelectGetAll.toJson(Services.TicketSelect));
+		String json = Jsoner.serialize(ticketSelectGetAll.toJson(Services.TicketGetAll));
 		System.out.println("factory: " + json);
 		return Jsoner.prettyPrint(json);
 	}

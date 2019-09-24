@@ -7,6 +7,6 @@ package hoa.api.services;
 public interface CRUD {
 	
 	abstract String queryDb();
-	String excuteQuery(SqlOperationType operation);
+	abstract Object excuteQuery(SqlOperationType operation);
 
 }
