@@ -1,4 +1,4 @@
-### Service Endpoints for the front-end:
+# Service Endpoints for the front-end:
 
-# Ticket
-<b>Insert New</b>
+### Ticket
+##### Insert New
