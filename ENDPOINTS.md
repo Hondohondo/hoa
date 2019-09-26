@@ -16,6 +16,7 @@ TYPE: HTTP POST
   <li>memberId (String)</li>
 </ol>
 </br>
+
 ##### Get All Ticket Records (for populating the admin table)
 TYPE: HTTP GET
 </br>URI: http://hoa.api.ngrok.io/services/ticket/microservices/ticket_crud_service/GetAll
