@@ -1,4 +1,4 @@
-# Service Endpoints for the Front-End. Remember to use Postman and plug in the following data. The Ajax code is auto matically generated.
+# Service Endpoints for the Front-End. Remember to use Postman and plug in the following data. The Ajax code is automatically generated.
 
 ### Ticket
 ##### Insert New Ticket
