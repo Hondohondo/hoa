@@ -109,47 +109,7 @@ public abstract class Ticket extends Service implements CRUD {
 			return executeQueryInsert();
 		}
 		return executeQuerySelect(this.getOperation());
-//		final String sql = getQuery();
-//		try {
-//			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-//			Connection connection = DriverManager.getConnection(connectionString);
-//			System.out.println("Connected.");
-//			PreparedStatement stmt = connection.prepareStatement(sql);
-//			if(operation.equals(SqlOperationType.insert)){
-//				stmt.executeUpdate();
-//				status = "success";
-//			} else if(operation.equals(SqlOperationType.select)) {
-//				ResultSet rs = stmt.executeQuery();
-//				status = "null data.";
-//				if(rs != null) {
-//					status = "success";
-//					while(rs.next()) {				
-//						this.subject = rs.getString(TicketColumns.Subject.toString());
-//						this.message = rs.getString(TicketColumns.TicketMessage.toString());
-//						this.isActive = (rs.getInt(TicketColumns.IsActive.toString()) == 1) ? true : false;
-//						this.createdBy = rs.getString(TicketColumns.CreatedBy.toString());
-//						this.createdDate = rs.getString(TicketColumns.CreatedDate.toString());
-//						this.name = rs.getString(TicketColumns.Name.toString());
-//						this.phoneNumber = rs.getString(TicketColumns.PhoneNumber.toString());
-//						this.memberID = rs.getString(TicketColumns.MemberID.toString());
-//					}
-//				}
-//			}
-//		} 
-//		catch (SQLServerException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} 
-//		catch (Exception ex) {
-//			// TODO Auto-generated catch block
-//			ex.printStackTrace();
-//		} 
-//		return status;
 	}
-
-//	protected JsonObject queryDbGetAll() {
-//		return executeQuerySelectGetAll();
-//	}
 
 	@Override
 	public final Object excuteQuery(SqlOperationType operation) {
@@ -342,20 +302,14 @@ public abstract class Ticket extends Service implements CRUD {
 
 	private String executeQueryInsert() {
 		final String sql = getQuery();
-		System.out.println("sql: " + sql);
-		System.out.println("sql: " + sql);
-		System.out.println("sql: " + sql);
-		System.out.println("sql: " + sql);
-		System.out.println("sql: " + sql);
-		System.out.println("sql: " + sql);
-		String insertStatus = "failed.";
+		String status = "failed.";
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			Connection connection = DriverManager.getConnection(connectionString);
 			System.out.println("Connected.");
 			PreparedStatement statement = connection.prepareStatement(sql);
 			statement.executeUpdate();
-			insertStatus = "ticket insert successful.";
+			status = "ticket insert successful.";
 
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -364,7 +318,7 @@ public abstract class Ticket extends Service implements CRUD {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return insertStatus;
+		return status;
 	}
 
 //	private JsonObject executeQuerySelectGetAll() {
