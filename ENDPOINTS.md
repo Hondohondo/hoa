@@ -1,7 +1,7 @@
-# Service Endpoints for the front-end:
+# Service Endpoints for the Front-End. Remember to use Postman and plug in the following data. The Ajax code is auto matically generated.
 
 ### Ticket
-##### Insert New
+##### Insert New Ticket
 TYPE: HTTP POST
 </br>URI: http://hoa.api.ngrok.io/services/ticket/microservices/ticket_crud_service/
 </br>Params: 
@@ -21,4 +21,13 @@ TYPE: HTTP POST
 TYPE: HTTP GET
 </br>URI: http://hoa.api.ngrok.io/services/ticket/microservices/ticket_crud_service/GetAll
 </br>Params: None!
+</br>
+
+##### Get A Ticket Record By ID (for the expansion overlay on the admin table)
+TYPE: HTTP GET
+</br>URI: http://hoa.api.ngrok.io/services/ticket/microservices/ticket_crud_service/by_ticketid
+</br>Params: 
+<ol>
+  <li>id (Integer)</li>
+</ol>
 </br>
