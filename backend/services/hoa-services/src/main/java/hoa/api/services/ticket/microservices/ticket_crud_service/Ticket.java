@@ -7,11 +7,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Observer;
+import java.util.Stack;
 
 import org.json.simple.JSONArray;
 
@@ -53,6 +56,17 @@ public abstract class Ticket extends Service implements CRUD {
 	private final String connectionString = ServiceConstants.CONNECTION_STRING;
 	protected final SqlOperationType operation;
 	private Map<SqlOperationType, Ticket> ticketTable;
+	private JsonObject ticketSelectGetAllJson;
+
+	protected List<Integer> jsonTicketIdList;
+	protected List<String> jsonSubjectList;
+	protected List<String> jsonMessageList;
+	protected List<Boolean> jsonIsActiveList;
+	protected List<String> jsonCreatedByList;
+	protected List<String> jsonCreatedDateList;
+	protected List<String> jsonNameList;
+	protected List<String> jsonPhoneNumberList;
+	protected List<String> jsonMemberIdList;
 
 	/**
 	 * @return the operation
@@ -68,21 +82,21 @@ public abstract class Ticket extends Service implements CRUD {
 		// queryDb();
 	}
 
-	@Override
-	public void toJson(Writer writer) throws IOException {
-		// this.queryDb();
-		final JsonObject json = new JsonObject();
-		json.put("ticketId", this.getTicketId());
-		json.put("subject", this.getSubject());
-		json.put("message", this.getMessage());
-		json.put("createdBy", this.getCreatedBy());
-		json.put("createdDate", this.getCreatedDate());
-		json.put("name", this.getName());
-		json.put("phoneNumber", this.getPhoneNumber());
-		json.put("email", this.getEmail());
-		json.put("memberId", this.getMemberID());
-		json.toJson(writer);
-	}
+//	@Override
+//	public void toJson(Writer writer) throws IOException {
+//		// this.queryDb();
+//		final JsonObject json = new JsonObject();
+//		json.put("ticketId", this.getTicketId());
+//		json.put("subject", this.getSubject());
+//		json.put("message", this.getMessage());
+//		json.put("createdBy", this.getCreatedBy());
+//		json.put("createdDate", this.getCreatedDate());
+//		json.put("name", this.getName());
+//		json.put("phoneNumber", this.getPhoneNumber());
+//		json.put("email", this.getEmail());
+//		json.put("memberId", this.getMemberID());
+//		json.toJson(writer);
+//	}
 
 	public final String queryDb() {
 		if (this.getOperation().equals(SqlOperationType.select)) {
@@ -91,6 +105,9 @@ public abstract class Ticket extends Service implements CRUD {
 //		else if(this.getOperation().equals(SqlOperationType.select_get_all)) {
 //			return executeQuerySelectGetAll();
 //		}
+		else if (this.getOperation().equals(SqlOperationType.insert)) {
+			return executeQueryInsert();
+		}
 		return executeQuerySelect(this.getOperation());
 //		final String sql = getQuery();
 //		try {
@@ -130,9 +147,9 @@ public abstract class Ticket extends Service implements CRUD {
 //		return status;
 	}
 
-	protected JsonObject queryDbGetAll() {
-		return executeQuerySelectGetAll();
-	}
+//	protected JsonObject queryDbGetAll() {
+//		return executeQuerySelectGetAll();
+//	}
 
 	@Override
 	public final Object excuteQuery(SqlOperationType operation) {
@@ -226,7 +243,7 @@ public abstract class Ticket extends Service implements CRUD {
 					ResultSet rs = stmt.executeQuery();
 					status = "null data.";
 					if (rs != null) {
-						status = "success";
+						status = "inserted";
 						while (rs.next()) {
 							this.subject = rs.getString(TicketColumns.Subject.toString());
 							this.message = rs.getString(TicketColumns.TicketMessage.toString());
@@ -250,8 +267,25 @@ public abstract class Ticket extends Service implements CRUD {
 		} else if (this.getOperation().equals(SqlOperationType.select_get_all)) {
 			final String sql = getQuery();
 			JsonObject json = new JsonObject();
-			List<JsonObject> jsonList = new ArrayList<JsonObject>();
-
+			
+			jsonTicketIdList = new ArrayList<Integer>();
+			//Iterator<Integer> ticketIdIter = jsonTicketIdList.iterator();
+			jsonSubjectList = new ArrayList<String>();
+			//Iterator<String> subjectIter = jsonSubjectList.iterator();
+			jsonMessageList = new ArrayList<String>();
+			//Iterator<String> messageIter = jsonSubjectList.iterator();
+			jsonIsActiveList = new ArrayList<Boolean>();
+			//Iterator<Boolean> isActiveIter = jsonIsActiveList.iterator();
+			jsonCreatedByList = new ArrayList<String>();
+			//Iterator<String> createdByIter = jsonCreatedByList.iterator();
+			jsonCreatedDateList = new ArrayList<String>();
+			//Iterator<String> createdDateIter = jsonCreatedDateList.iterator();
+			jsonNameList = new ArrayList<String>();
+			//Iterator<String> nameIter = jsonNameList.iterator();
+			jsonPhoneNumberList = new ArrayList<String>();
+			//Iterator<String> phoneNumberIter = jsonPhoneNumberList.iterator();
+			jsonMemberIdList = new ArrayList<String>();
+			//Iterator<String> MemberIdIter = jsonMemberIdList.iterator();
 			try {
 				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 				Connection connection = DriverManager.getConnection(connectionString);
@@ -259,14 +293,14 @@ public abstract class Ticket extends Service implements CRUD {
 				PreparedStatement stmt = connection.prepareStatement(sql);
 				ResultSet rs = stmt.executeQuery();
 				status = "null data.";
-				JSONArray ticketsJsonArray = new JSONArray();
-
+				// JSONArray ticketsJsonArray = new JSONArray();
+				JsonObject tickets = new JsonObject();
 				if (rs != null) {
 					status = "success";
 					while (rs.next()) {
-						JsonObject ticket = new JsonObject();
+						// JsonObject ticket = new JsonObject();
+						this.ticketId = rs.getInt(TicketColumns.TicketID.toString());
 						this.subject = rs.getString(TicketColumns.Subject.toString());
-						ticket.put("subject", this.getSubject());
 						this.message = rs.getString(TicketColumns.TicketMessage.toString());
 						this.isActive = (rs.getInt(TicketColumns.IsActive.toString()) == 1) ? true : false;
 						this.createdBy = rs.getString(TicketColumns.CreatedBy.toString());
@@ -275,9 +309,21 @@ public abstract class Ticket extends Service implements CRUD {
 						this.phoneNumber = rs.getString(TicketColumns.PhoneNumber.toString());
 						this.memberID = rs.getString(TicketColumns.MemberID.toString());
 
-						ticketsJsonArray.add(ticket);
+						jsonTicketIdList.add(this.getTicketId());
+						jsonSubjectList.add(this.getSubject());
+						jsonMessageList.add(this.getMessage());
+						jsonIsActiveList.add(this.getIsActive());
+						jsonCreatedByList.add(this.getCreatedBy());
+						jsonCreatedDateList.add(this.getCreatedDate());
+						jsonNameList.add(this.getName());
+						jsonPhoneNumberList.add(this.getPhoneNumber());
+						jsonMemberIdList.add(this.getMemberID());
+
+						// tickets.put("ticket", ticket);
+						// ticketsJsonArray.add(ticket);
 					}
-					json.put("tickets", ticketsJsonArray);
+					// json.put("tickets", tickets);
+					// this.ticketSelectGetAllJson = json;
 				}
 
 			} catch (SQLServerException e) {
@@ -287,54 +333,82 @@ public abstract class Ticket extends Service implements CRUD {
 				// TODO Auto-generated catch block
 				ex.printStackTrace();
 			}
-			return null;
+			// return null;
+			return json.toJson();
 		}
 
 		return "error.";
 	}
 
-	private JsonObject executeQuerySelectGetAll() {
+	private String executeQueryInsert() {
 		final String sql = getQuery();
-		JsonObject json = new JsonObject();
-		List<JsonObject> jsonList = new ArrayList<JsonObject>();
-
+		System.out.println("sql: " + sql);
+		System.out.println("sql: " + sql);
+		System.out.println("sql: " + sql);
+		System.out.println("sql: " + sql);
+		System.out.println("sql: " + sql);
+		System.out.println("sql: " + sql);
+		String insertStatus = "failed.";
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			Connection connection = DriverManager.getConnection(connectionString);
 			System.out.println("Connected.");
-			PreparedStatement stmt = connection.prepareStatement(sql);
-			ResultSet rs = stmt.executeQuery();
-			status = "null data.";
-			JSONArray ticketsJsonArray = new JSONArray();
+			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.executeUpdate();
+			insertStatus = "ticket insert successful.";
 
-			if (rs != null) {
-				status = "success";
-				while (rs.next()) {
-					JsonObject ticket = new JsonObject();
-					this.subject = rs.getString(TicketColumns.Subject.toString());
-					ticket.put("subject", this.getSubject());
-					this.message = rs.getString(TicketColumns.TicketMessage.toString());
-					this.isActive = (rs.getInt(TicketColumns.IsActive.toString()) == 1) ? true : false;
-					this.createdBy = rs.getString(TicketColumns.CreatedBy.toString());
-					this.createdDate = rs.getString(TicketColumns.CreatedDate.toString());
-					this.name = rs.getString(TicketColumns.Name.toString());
-					this.phoneNumber = rs.getString(TicketColumns.PhoneNumber.toString());
-					this.memberID = rs.getString(TicketColumns.MemberID.toString());
-
-					ticketsJsonArray.add(ticket);
-				}
-				json.put("tickets", ticketsJsonArray);
-			}
-
-		} catch (SQLServerException e) {
+		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (Exception ex) {
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			ex.printStackTrace();
+			e.printStackTrace();
 		}
-		return null;
+		return insertStatus;
 	}
+
+//	private JsonObject executeQuerySelectGetAll() {
+//		final String sql = getQuery();
+//		JsonObject json = new JsonObject();
+//		List<JsonObject> jsonSubjectList = new ArrayList<JsonObject>();
+//
+//		try {
+//			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+//			Connection connection = DriverManager.getConnection(connectionString);
+//			System.out.println("Connected.");
+//			PreparedStatement stmt = connection.prepareStatement(sql);
+//			ResultSet rs = stmt.executeQuery();
+//			status = "null data.";
+//			JSONArray ticketsJsonArray = new JSONArray();
+//
+//			if (rs != null) {
+//				status = "success";
+//				while (rs.next()) {
+//					JsonObject ticket = new JsonObject();
+//					this.subject = rs.getString(TicketColumns.Subject.toString());
+//					ticket.put("subject", this.getSubject());
+//					this.message = rs.getString(TicketColumns.TicketMessage.toString());
+//					this.isActive = (rs.getInt(TicketColumns.IsActive.toString()) == 1) ? true : false;
+//					this.createdBy = rs.getString(TicketColumns.CreatedBy.toString());
+//					this.createdDate = rs.getString(TicketColumns.CreatedDate.toString());
+//					this.name = rs.getString(TicketColumns.Name.toString());
+//					this.phoneNumber = rs.getString(TicketColumns.PhoneNumber.toString());
+//					this.memberID = rs.getString(TicketColumns.MemberID.toString());
+//
+//					ticketsJsonArray.add(ticket);
+//				}
+//				json.put("tickets", ticketsJsonArray);
+//			}
+//
+//		} catch (SQLServerException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (Exception ex) {
+//			// TODO Auto-generated catch block
+//			ex.printStackTrace();
+//		}
+//		return null;
+//	}
 
 	protected abstract ResultSet executeSql(PreparedStatement stmt);
 
@@ -415,6 +489,17 @@ public abstract class Ticket extends Service implements CRUD {
 	 */
 	protected synchronized String getStatus() {
 		return status;
+	}
+
+	/**
+	 * @return the ticketSelectGetAllJson
+	 */
+	protected synchronized JsonObject getTicketSelectGetAllJson() {
+		return ticketSelectGetAllJson;
+	}
+
+	protected synchronized List<String> getJsonSubjectList() {
+		return jsonSubjectList;
 	}
 
 	/**

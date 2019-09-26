@@ -69,7 +69,8 @@ public final class ApiController {
 	 * </br>@return
 	 */
 	@RequestMapping(TicketCRUDService_Constants.CREATE)
-	public Ticket insertNew (@RequestParam(value="subject") String subject,
+	@ResponseStatus(HttpStatus.CREATED)
+	public String insertNew (@RequestParam(value="subject") String subject,
 							 @RequestParam(value="ticketMessage") String ticketMessage,
 							 @RequestParam(value="isActive") boolean isActive,
 							 @RequestParam(value="createdBy") String createdBy,
