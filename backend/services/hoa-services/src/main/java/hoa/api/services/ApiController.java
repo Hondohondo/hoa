@@ -1,6 +1,8 @@
 package hoa.api.services;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,7 +45,8 @@ public final class ApiController {
 	 * </br>@param id
 	 * </br>@return
 	 */
-	@RequestMapping(method = RequestMethod.GET, value = TicketCRUDService_Constants.READ_BY_TICKETID)
+	@RequestMapping(method = RequestMethod.GET, value = TicketCRUDService_Constants.READ_BY_TICKETID,
+					consumes = "application/json", produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public String retrierveByTicketId (@RequestParam(value="id") int id) {
 		return new TicketCRUDService_CRUDFactory().init(id);
@@ -55,8 +58,9 @@ public final class ApiController {
 	 * </br>DESCRIPTION: Bulk retreival. 
 	 * </br>@return
 	 */
-	@RequestMapping(method = RequestMethod.GET, value = TicketCRUDService_Constants.READ_ALL)
+	@RequestMapping(method = RequestMethod.GET, value = TicketCRUDService_Constants.READ_ALL, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
+	@CrossOrigin(/*origins = "http://hoa.ngrok.io" /*+ TicketCRUDService_Constants.READ_ALL*/)
 	public String retrierveByAll () {
 		return new TicketCRUDService_CRUDFactory().init();
 	}
