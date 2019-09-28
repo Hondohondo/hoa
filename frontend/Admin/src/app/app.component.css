@@ -1,0 +1,9 @@
+.navbar {
+    border-bottom-width: 1px;
+    border-bottom-color: gray;
+    border-bottom-style: solid;
+}
+
+a {
+    color: gray;
+}
