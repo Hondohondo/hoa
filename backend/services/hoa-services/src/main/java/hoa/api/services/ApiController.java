@@ -46,7 +46,7 @@ public final class ApiController {
 	 * </br>@return
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = TicketCRUDService_Constants.READ_BY_TICKETID,
-					consumes = "application/json", produces = "application/json")
+					/*consumes = "application/json",*/ produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public String retrierveByTicketId (@RequestParam(value="id") int id) {
 		return new TicketCRUDService_CRUDFactory().init(id);

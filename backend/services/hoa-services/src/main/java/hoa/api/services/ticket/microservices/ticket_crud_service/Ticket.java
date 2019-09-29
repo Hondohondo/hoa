@@ -110,6 +110,16 @@ public abstract class Ticket extends Service implements CRUD {
 		}
 		return executeQuerySelect(this.getOperation());
 	}
+	
+	public final String queryDb(SqlOperationType operation) {
+		if (this.getOperation().equals(SqlOperationType.select)) {
+			return executeQuerySelect(this.getOperation());
+		}
+		else if (this.getOperation().equals(SqlOperationType.insert)) {
+			return executeQueryInsert();
+		}
+		return executeQuerySelect(this.getOperation());
+	}
 
 	@Override
 	public final Object excuteQuery(SqlOperationType operation) {
@@ -320,49 +330,6 @@ public abstract class Ticket extends Service implements CRUD {
 		}
 		return status;
 	}
-
-//	private JsonObject executeQuerySelectGetAll() {
-//		final String sql = getQuery();
-//		JsonObject json = new JsonObject();
-//		List<JsonObject> jsonSubjectList = new ArrayList<JsonObject>();
-//
-//		try {
-//			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-//			Connection connection = DriverManager.getConnection(connectionString);
-//			System.out.println("Connected.");
-//			PreparedStatement stmt = connection.prepareStatement(sql);
-//			ResultSet rs = stmt.executeQuery();
-//			status = "null data.";
-//			JSONArray ticketsJsonArray = new JSONArray();
-//
-//			if (rs != null) {
-//				status = "success";
-//				while (rs.next()) {
-//					JsonObject ticket = new JsonObject();
-//					this.subject = rs.getString(TicketColumns.Subject.toString());
-//					ticket.put("subject", this.getSubject());
-//					this.message = rs.getString(TicketColumns.TicketMessage.toString());
-//					this.isActive = (rs.getInt(TicketColumns.IsActive.toString()) == 1) ? true : false;
-//					this.createdBy = rs.getString(TicketColumns.CreatedBy.toString());
-//					this.createdDate = rs.getString(TicketColumns.CreatedDate.toString());
-//					this.name = rs.getString(TicketColumns.Name.toString());
-//					this.phoneNumber = rs.getString(TicketColumns.PhoneNumber.toString());
-//					this.memberID = rs.getString(TicketColumns.MemberID.toString());
-//
-//					ticketsJsonArray.add(ticket);
-//				}
-//				json.put("tickets", ticketsJsonArray);
-//			}
-//
-//		} catch (SQLServerException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (Exception ex) {
-//			// TODO Auto-generated catch block
-//			ex.printStackTrace();
-//		}
-//		return null;
-//	}
 
 	protected abstract ResultSet executeSql(PreparedStatement stmt);
 
