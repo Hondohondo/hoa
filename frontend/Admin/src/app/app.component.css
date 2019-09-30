@@ -4,6 +4,11 @@
     border-bottom-style: solid;
 }
 
-a {
+.navbar-nav {
+    font-size: 1.8em !important;
+}
+
+.nav-link {
+    padding-right: 5rem !important;
     color: gray;
 }

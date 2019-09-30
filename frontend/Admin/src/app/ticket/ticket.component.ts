@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HOAService } from '../hoa.service';
 import { Ticket } from '../Ticket';
+import { TicketPost } from '../TicketPost';
 
 @Component({
   selector: 'app-ticket',
@@ -9,36 +10,38 @@ import { Ticket } from '../Ticket';
 })
 export class TicketComponent implements OnInit {
 
-  tickets: any[];
+  tickets: Ticket[];
+  headers = ["ticketId", "name", "subject", "createdDate"];
+
+  ticket: TicketPost = {
+    ticketMessage:'',
+    subject:'',
+    email:'',
+    phoneNumber:'',
+    name:''
+  }
 
   constructor(public HOAService : HOAService) { }
 
   ngOnInit() {
+    this.getAllTickets();
   }
 
   getAllTickets(){
     this.HOAService.getAllTickets()
-      .subscribe((data) => {
+      .subscribe((data)=>{
         console.log(data);
-        if(typeof data === "string"){
-          alert("fuck");
-        }
-        this.tickets = data['tickets'];
+        this.tickets=data['tickets'];
         console.log(this.tickets);
-      })
+      });
   }
 
-
-
-
-
-
-
-  
-  printArray(){
-    console.log(this.tickets[0]);
-    // if(typeof this.tickets === "string"){
-    //   alert("string!");
-    // }
+  addNewTicket(){
+    this.ticket.ticketMessage ='';
+    this.ticket.email='';
+    this.ticket.name='';
+    this.ticket.subject='';
+    this.ticket.phoneNumber=''; 
+    this.HOAService.addTicket(this.ticket);
   }
 }
