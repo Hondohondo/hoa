@@ -26,6 +26,8 @@ public class TicketCRUDService_CRUDFactory extends CRUDService_CRUDFactory{
 	}
 	
 	public String init(String subject, String ticketMessage, boolean isActive, String name, String phoneNumber, String email, String memberId) {
+		isActive = true;
+		memberId = (memberId == null) ? "1" : memberId;
 		TicketInsert ticketInsert = new TicketInsert(subject, ticketMessage, isActive, name, phoneNumber, email, memberId);
 		String json = /*(Jsoner.serialize(*/ticketInsert.toJson(Services.TicketInsert)/*)*/;
 		System.out.println("factory: " + json);

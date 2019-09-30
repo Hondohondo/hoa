@@ -67,21 +67,21 @@ public final class ApiController {
 	
 	/**
 	 * </br>SERVICE: ticket/microservices/ticket_crud_service/
-	 * </br>TYPE: GET
-	 * </br>DESCRIPTION: Individual record retrieval from TicketDB by TicketID number.
+	 * </br>TYPE: POST
+	 * </br>DESCRIPTION: Insert a new ticket.
 	 * </br>@param id
 	 * </br>@return
 	 */
 	@RequestMapping(TicketCRUDService_Constants.CREATE)
 	@ResponseStatus(HttpStatus.CREATED)
-	public String insertNew (@RequestParam(value="subject") String subject,
-							 @RequestParam(value="ticketMessage") String ticketMessage,
-							 @RequestParam(value="isActive") boolean isActive,
-							 @RequestParam(value="createdBy") String createdBy,
-							 @RequestParam(value="name") String name,
-							 @RequestParam(value="phoneNumber") String phoneNumber,
-							 @RequestParam(value="email") String email,
-							 @RequestParam(value="memberId") String memberId) {
+	public String insertNew (@RequestParam(value="subject", required=false) String subject,
+							 @RequestParam(value="ticketMessage", required=false) String ticketMessage,
+							 @RequestParam(value="isActive", required=false) boolean isActive,
+							 @RequestParam(value="createdBy", required=false) String createdBy,
+							 @RequestParam(value="name", required=false) String name,
+							 @RequestParam(value="phoneNumber", required=false) String phoneNumber,
+							 @RequestParam(value="email", required=false) String email,
+							 @RequestParam(value="memberId", required=false) String memberId) {
 		return new TicketCRUDService_CRUDFactory().init(subject, ticketMessage, isActive, name, phoneNumber, email, memberId);
 	}
 	
