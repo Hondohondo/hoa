@@ -74,6 +74,7 @@ public final class ApiController {
 	 */
 	@RequestMapping(TicketCRUDService_Constants.CREATE)
 	@ResponseStatus(HttpStatus.CREATED)
+	@CrossOrigin()
 	public String insertNew (@RequestParam(value="subject", required=false) String subject,
 							 @RequestParam(value="ticketMessage", required=false) String ticketMessage,
 							 @RequestParam(value="isActive", required=false) boolean isActive,
