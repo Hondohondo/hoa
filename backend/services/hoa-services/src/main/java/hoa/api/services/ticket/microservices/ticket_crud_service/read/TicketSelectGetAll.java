@@ -44,7 +44,7 @@ public class TicketSelectGetAll extends Ticket{
 	@Override
 	protected String getQuery() {
 		// TODO Auto-generated method stub
-		return "SELECT * FROM Ticket";
+		return "SELECT * from TICKET ORDER BY TicketID DESC";
 	}
 
 	@Override
