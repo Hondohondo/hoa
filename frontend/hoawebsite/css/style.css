@@ -38,6 +38,31 @@ position: relative; }
 .header__logo {
     height: 3.5rem; }
 
+
+  /*
+=====================
+ --- ALL LINKS ---
+=====================
+  */ 
+
+
+.nav__el,
+.nav__el:link,
+.nav__el:visited {
+   
+   
+ 
+}
+
+.nav__el:hover,
+.nav__el:active {
+    -webkit-transform: translateY(-2px);
+    transform: translateY(-2px);
+    text-shadow: 0 0.7rem 1rem black;
+}
+
+
+
 .nav {
   /* position: absolute;
   top: 4rem;
@@ -52,8 +77,19 @@ position: relative; }
    color: #f7f7f7;
    text-transform: uppercase;
    font-size: 1.6rem;
+   
    text-decoration: none;
 /*   padding-left: 5rem;*/
+    
+   transition: all 0.2s;
+}
+
+.nav-logout:hover,
+.nav-user:active,
+.nav-logout:active,
+.nav-user:hover {
+    transform: translateY(-2px);
+    text-shadow: 0 0.7rem 1rem black;
 }
 
 .nav-logout {
@@ -159,7 +195,90 @@ textarea {
 }
 
 
-  /*
+
+/*
+=====================
+ --- ADMIN PAGE ---
+=====================
+  */
+.admin-view {
+    background-color: #fff;
+    max-width: 120rem;
+    margin: 0 auto;
+/*    min-height: 100vh;*/
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: 0 2.5rem 8rem 2rem rgba(0, 0, 0, 0.07);
+   
+}
+
+.admin-view__menu {
+    background-image: linear-gradient(to right bottom, #7dd56f, #28b487);
+    padding: 4rem 0;
+    width: 32rem;
+/*    padding-top: 4rem;*/
+/*    min-height: 110vh;*/
+/*    height: 100vh;*/
+}
+
+
+.side-nav {
+    list-style: none;
+    height: 100vh;
+}
+
+.side-nav li {
+    margin: 1rem 0;
+    border-left: 0 solid #fff;
+    transition: all 0.3s;
+}
+
+.side-nav--active,
+.side-nav li:hover {
+    border-left: 4px solid #fff !important;
+}
+
+.side-nav--active a {
+    transform: translateX(-3px);
+}
+
+
+/*
+to try to fix the problem - still doesnt work
+.side-nav--active a:hover {
+    transform: translateX(-9px);
+}
+*/
+
+.side-nav a:link,
+.side-nav a:visited {
+    display: flex; /*I only need this for the transformation of side-nav--active to work ??I dont know why*/
+    padding: 1rem 4rem;
+    color: #fff;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    font-weight: 400;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.side-nav a:hover,
+.side-nav a:active {
+    -webkit-transform: translateX(3px);
+    transform: translateX(3px);
+}
+
+.side-nav .ion-icon {
+    height: 1.9rem;
+    width: 1.9rem;
+    fill: #f7f7f7;
+    margin-right: 2rem;
+}
+
+
+
+
+/*
 =====================
  --- BUTTONS ---
 =====================
