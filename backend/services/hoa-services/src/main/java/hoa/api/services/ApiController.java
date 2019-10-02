@@ -15,6 +15,7 @@ import hoa.api.services.ticket.microservices.CRUDService_CRUDFactory;
 import hoa.api.services.ticket.microservices.ticket_crud_service.Ticket;
 import hoa.api.services.ticket.microservices.ticket_crud_service.TicketCRUDService_CRUDFactory;
 import hoa.api.services.ticket.microservices.ticket_crud_service.TicketCRUDService_Constants;
+import hoa.api.services.ticket.microservices.ticket_crud_service.create.TicketInsert;
 
 /**
  * </br>All new request maps must have the following comments:
@@ -77,16 +78,19 @@ public final class ApiController {
 	@RequestMapping(method = RequestMethod.POST, value = TicketCRUDService_Constants.CREATE)
 	@ResponseStatus(HttpStatus.CREATED)
 	@CrossOrigin()
-	public @ResponseBody String insertNew (
-							 @RequestParam(value="subject", required=false) @RequestBody String subject,
-							 @RequestParam(value="ticketMessage", required=false) String ticketMessage,
-							 @RequestParam(value="isActive", required=false) boolean isActive,
-							 @RequestParam(value="createdBy", required=false) String createdBy,
-							 @RequestParam(value="name", required=false) String name,
-							 @RequestParam(value="phoneNumber", required=false) String phoneNumber,
-							 @RequestParam(value="email", required=false) String email,
-							 @RequestParam(value="memberId", required=false) String memberId) {
-		return new TicketCRUDService_CRUDFactory().init(subject, ticketMessage, isActive, name, phoneNumber, email, memberId);
+	public /*@ResponseBody*/ String insertNew (
+							 @RequestBody TicketInsert ticket
+//							 @RequestParam(value="subject", required=false) @RequestBody String subject,
+//							 @RequestParam(value="ticketMessage", required=false) String ticketMessage,
+//							 @RequestParam(value="isActive", required=false) boolean isActive,
+//							 @RequestParam(value="createdBy", required=false) String createdBy,
+//							 @RequestParam(value="name", required=false) String name,
+//							 @RequestParam(value="phoneNumber", required=false) String phoneNumber,
+//							 @RequestParam(value="email", required=false) String email,
+//							 @RequestParam(value="memberId", required=false) String memberId
+							 ) {
+		System.out.println("Subject = " + ticket.subject);
+		return new TicketCRUDService_CRUDFactory().init(ticket.subject, ticket.message, ticket.isActive, ticket.name, ticket.phoneNumber, ticket.email, ticket.memberID);
 	}
 	
 	

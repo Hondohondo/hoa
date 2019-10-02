@@ -22,6 +22,11 @@ public class TicketInsert extends Ticket{
 //		super(operation);
 //		// TODO Auto-generated constructor stub
 //	}
+	
+	public TicketInsert() {
+		super(SqlOperationType.insert);
+		super.queryDb();
+	}
 
 
 	public TicketInsert(String subject, String ticketMessage, boolean isActive, String name, String phoneNumber,
@@ -73,7 +78,7 @@ public class TicketInsert extends Ticket{
 												+ this.getName() + "','"
 														+ this.getPhoneNumber() + "','"
 																+ this.getEmail() + "','"
-																		+ this.getMemberID() + "');";
+																		+ /*this.getMemberID()*/ 1 + "');";
 	}
 
 	@Override

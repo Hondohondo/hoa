@@ -18,6 +18,8 @@ import java.util.Stack;
 
 import org.json.simple.JSONArray;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.cliftonlabs.json_simple.JsonObject;
 import com.github.cliftonlabs.json_simple.Jsonable;
 
@@ -41,19 +43,25 @@ import hoa.api.services.ticket.microservices.ticket_crud_service.read.TicketSele
  *
  */
 public abstract class Ticket extends Service implements CRUD {
-
-	protected volatile int ticketId;
-	protected volatile String subject;
-	private volatile String message;
-	private volatile String createdBy;
-	private volatile String createdDate;
-	private volatile String name;
-	private volatile String phoneNumber;
-	private volatile String email;
-	private volatile String memberID;
-	private volatile String status;
-	private volatile boolean isActive;
-	private final String connectionString = ServiceConstants.CONNECTION_STRING;
+	//@JsonProperty(required = false)
+	public volatile int ticketId; //protected
+	//@JsonProperty(required = false)
+	public volatile String subject;	//protected
+	//@JsonProperty(required = false)
+	public volatile String message;	//private 
+	//@JsonProperty(required = false)
+	public volatile String createdBy;	//...
+	//@JsonProperty(required = false)
+	public volatile String createdDate;
+	//@JsonProperty(required = false)
+	public volatile String name;
+	public volatile String phoneNumber;
+	public volatile String email;
+	public volatile String memberID;
+	public volatile String status;
+	public volatile boolean isActive;
+	
+	private final String connectionString = ServiceConstants.CONNECTION_STRING;	
 	protected final SqlOperationType operation;
 	private Map<SqlOperationType, Ticket> ticketTable;
 	private JsonObject ticketSelectGetAllJson;
@@ -335,6 +343,7 @@ public abstract class Ticket extends Service implements CRUD {
 
 	protected abstract String getQuery();
 
+	@JsonProperty("ticketId")
 	/**
 	 * @return the ticketId
 	 */
@@ -342,6 +351,7 @@ public abstract class Ticket extends Service implements CRUD {
 		return ticketId;
 	}
 
+	@JsonProperty("ticketMessage")
 	/**
 	 * @return the message
 	 */
@@ -349,6 +359,7 @@ public abstract class Ticket extends Service implements CRUD {
 		return message;
 	}
 
+	@JsonProperty("subject")
 	/**
 	 * @return the subject
 	 */
@@ -356,6 +367,7 @@ public abstract class Ticket extends Service implements CRUD {
 		return subject;
 	}
 
+	@JsonProperty("createdBy")
 	/**
 	 * @return the createdBy
 	 */
@@ -363,6 +375,7 @@ public abstract class Ticket extends Service implements CRUD {
 		return createdBy;
 	}
 
+	@JsonProperty("createdDate")
 	/**
 	 * @return the createdDate
 	 */
@@ -370,6 +383,7 @@ public abstract class Ticket extends Service implements CRUD {
 		return createdDate;
 	}
 
+	@JsonProperty("name")
 	/**
 	 * @return the name
 	 */
@@ -377,6 +391,7 @@ public abstract class Ticket extends Service implements CRUD {
 		return name;
 	}
 
+	@JsonProperty("phoneNumber")
 	/**
 	 * @return the phoneNumber
 	 */
@@ -384,6 +399,7 @@ public abstract class Ticket extends Service implements CRUD {
 		return phoneNumber;
 	}
 
+	@JsonProperty("email")
 	/**
 	 * @return the email
 	 */
@@ -391,6 +407,7 @@ public abstract class Ticket extends Service implements CRUD {
 		return email;
 	}
 
+	@JsonProperty("memberId")
 	/**
 	 * @return the memberID
 	 */
@@ -398,6 +415,7 @@ public abstract class Ticket extends Service implements CRUD {
 		return memberID;
 	}
 
+	@JsonProperty("isActive")
 	/**
 	 * @return the isActive
 	 */
@@ -405,6 +423,7 @@ public abstract class Ticket extends Service implements CRUD {
 		return isActive;
 	}
 
+	//@JsonProperty("status")
 	/**
 	 * @return the status
 	 */
@@ -423,6 +442,7 @@ public abstract class Ticket extends Service implements CRUD {
 		return jsonSubjectList;
 	}
 
+	@JsonProperty("ticketId")
 	/**
 	 * @param ticketId the ticketId to set
 	 */
@@ -430,6 +450,7 @@ public abstract class Ticket extends Service implements CRUD {
 		this.ticketId = ticketId;
 	}
 
+	@JsonProperty("subject")
 	/**
 	 * @param subject the subject to set
 	 */
@@ -437,6 +458,7 @@ public abstract class Ticket extends Service implements CRUD {
 		this.subject = subject;
 	}
 
+	@JsonProperty("ticketMessage")
 	/**
 	 * @param message the message to set
 	 */
@@ -444,6 +466,7 @@ public abstract class Ticket extends Service implements CRUD {
 		this.message = message;
 	}
 
+	@JsonProperty("createdBy")
 	/**
 	 * @param createdBy the createdBy to set
 	 */
@@ -451,6 +474,7 @@ public abstract class Ticket extends Service implements CRUD {
 		this.createdBy = createdBy;
 	}
 
+	@JsonProperty("name")
 	/**
 	 * @param name the name to set
 	 */
@@ -458,6 +482,7 @@ public abstract class Ticket extends Service implements CRUD {
 		this.name = name;
 	}
 
+	@JsonProperty("phoneNumber")
 	/**
 	 * @param phoneNumber the phoneNumber to set
 	 */
@@ -465,6 +490,7 @@ public abstract class Ticket extends Service implements CRUD {
 		this.phoneNumber = phoneNumber;
 	}
 
+	@JsonProperty("email")
 	/**
 	 * @param email the email to set
 	 */
@@ -472,6 +498,7 @@ public abstract class Ticket extends Service implements CRUD {
 		this.email = email;
 	}
 
+	//@JsonProperty("memberID")
 	/**
 	 * @param memberID the memberID to set
 	 */
@@ -479,6 +506,7 @@ public abstract class Ticket extends Service implements CRUD {
 		this.memberID = memberID;
 	}
 
+	@JsonProperty("status")
 	/**
 	 * @param status the status to set
 	 */
@@ -486,6 +514,7 @@ public abstract class Ticket extends Service implements CRUD {
 		this.status = status;
 	}
 
+	@JsonProperty("isActive")
 	/**
 	 * @param isActive the isActive to set
 	 */
@@ -493,6 +522,7 @@ public abstract class Ticket extends Service implements CRUD {
 		this.isActive = isActive;
 	}
 
+	@JsonProperty("memberId")
 	/**
 	 * @param isActive the isActive to set
 	 */
@@ -500,6 +530,7 @@ public abstract class Ticket extends Service implements CRUD {
 		this.memberID = memeberId;
 	}
 
+	//@JsonProperty("createdDate")
 	/**
 	 * @param createdDate the createdDate to set
 	 */
