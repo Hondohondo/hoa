@@ -74,7 +74,7 @@ public final class ApiController {
 	 * </br>@param id
 	 * </br>@return
 	 */
-	@RequestMapping(TicketCRUDService_Constants.CREATE)
+	@RequestMapping(method = RequestMethod.POST, value = TicketCRUDService_Constants.CREATE)
 	@ResponseStatus(HttpStatus.CREATED)
 	@CrossOrigin()
 	public @ResponseBody String insertNew (@RequestBody
