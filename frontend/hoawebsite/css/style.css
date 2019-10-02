@@ -45,24 +45,6 @@ position: relative; }
 =====================
   */ 
 
-
-.nav__el,
-.nav__el:link,
-.nav__el:visited {
-   
-   
- 
-}
-
-.nav__el:hover,
-.nav__el:active {
-    -webkit-transform: translateY(-2px);
-    transform: translateY(-2px);
-    text-shadow: 0 0.7rem 1rem black;
-}
-
-
-
 .nav {
   /* position: absolute;
   top: 4rem;
@@ -214,8 +196,8 @@ textarea {
 
 .admin-view__menu {
     background-image: linear-gradient(to right bottom, #7dd56f, #28b487);
-    padding: 4rem 0;
-    width: 32rem;
+/*    padding: 4rem 0;*/
+/*    width: 32rem;*/
 /*    padding-top: 4rem;*/
 /*    min-height: 110vh;*/
 /*    height: 100vh;*/
@@ -224,10 +206,11 @@ textarea {
 
 .side-nav {
     list-style: none;
-    height: 100vh;
+/*    height: 100vh;*/
 }
 
 .side-nav li {
+    display: inline-block;
     margin: 1rem 0;
     border-left: 0 solid #fff;
     transition: all 0.3s;
