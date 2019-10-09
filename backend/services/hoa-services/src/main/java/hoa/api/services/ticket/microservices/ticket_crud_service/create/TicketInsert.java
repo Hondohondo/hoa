@@ -25,7 +25,7 @@ public class TicketInsert extends Ticket{
 	
 	public TicketInsert() {
 		super(SqlOperationType.insert);
-		super.queryDb();
+		//super.queryDb();
 	}
 
 
