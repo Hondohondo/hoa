@@ -91,7 +91,7 @@ public class TicketInsert extends Ticket{
 	@Override
 	public void toJson(Writer writer) throws IOException {
 		// TODO Auto-generated method stub
-		String status = super.getStatus();
+		String status = "inserted.";//super.getStatus();
 		JsonObject json = new JsonObject();
 		json.put("status", status);
 		json.toJson(writer);

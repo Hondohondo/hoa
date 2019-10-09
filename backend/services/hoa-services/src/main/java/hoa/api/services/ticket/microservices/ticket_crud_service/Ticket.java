@@ -75,6 +75,7 @@ public abstract class Ticket extends Service implements CRUD {
 	protected List<String> jsonNameList;
 	protected List<String> jsonPhoneNumberList;
 	protected List<String> jsonMemberIdList;
+	//protected List<String> jsonEmailList;
 
 	/**
 	 * @return the operation
@@ -115,7 +116,10 @@ public abstract class Ticket extends Service implements CRUD {
 //		}
 		else if (this.getOperation().equals(SqlOperationType.insert)) {
 			return executeQueryInsert();
+		} else if(this.getOperation().equals(SqlOperationType.update)) {
+			return executeQueryInsert();
 		}
+		
 		return executeQuerySelect(this.getOperation());
 	}
 	
@@ -153,6 +157,7 @@ public abstract class Ticket extends Service implements CRUD {
 							this.createdBy = rs.getString(TicketColumns.CreatedBy.toString());
 							this.createdDate = rs.getString(TicketColumns.CreatedDate.toString());
 							this.name = rs.getString(TicketColumns.Name.toString());
+							this.email = rs.getString(TicketColumns.Email.toString());
 							this.phoneNumber = rs.getString(TicketColumns.PhoneNumber.toString());
 							this.memberID = rs.getString(TicketColumns.MemberID.toString());
 						}
@@ -188,6 +193,7 @@ public abstract class Ticket extends Service implements CRUD {
 							this.createdBy = rs.getString(TicketColumns.CreatedBy.toString());
 							this.createdDate = rs.getString(TicketColumns.CreatedDate.toString());
 							this.name = rs.getString(TicketColumns.Name.toString());
+							this.email = rs.getString(TicketColumns.Email.toString());
 							this.phoneNumber = rs.getString(TicketColumns.PhoneNumber.toString());
 							this.memberID = rs.getString(TicketColumns.MemberID.toString());
 						}
@@ -229,6 +235,7 @@ public abstract class Ticket extends Service implements CRUD {
 							this.createdBy = rs.getString(TicketColumns.CreatedBy.toString());
 							this.createdDate = rs.getString(TicketColumns.CreatedDate.toString());
 							this.name = rs.getString(TicketColumns.Name.toString());
+							this.email = rs.getString(TicketColumns.Email.toString());
 							this.phoneNumber = rs.getString(TicketColumns.PhoneNumber.toString());
 							this.memberID = rs.getString(TicketColumns.MemberID.toString());
 						}
@@ -258,6 +265,7 @@ public abstract class Ticket extends Service implements CRUD {
 			//Iterator<String> createdByIter = jsonCreatedByList.iterator();
 			jsonCreatedDateList = new ArrayList<String>();
 			//Iterator<String> createdDateIter = jsonCreatedDateList.iterator();
+			//jsonEmailList = new ArrayList<String>();
 			jsonNameList = new ArrayList<String>();
 			//Iterator<String> nameIter = jsonNameList.iterator();
 			jsonPhoneNumberList = new ArrayList<String>();
@@ -284,6 +292,7 @@ public abstract class Ticket extends Service implements CRUD {
 						this.createdBy = rs.getString(TicketColumns.CreatedBy.toString());
 						this.createdDate = rs.getString(TicketColumns.CreatedDate.toString());
 						this.name = rs.getString(TicketColumns.Name.toString());
+						this.email = rs.getString("email");
 						this.phoneNumber = rs.getString(TicketColumns.PhoneNumber.toString());
 						this.memberID = rs.getString(TicketColumns.MemberID.toString());
 
@@ -296,7 +305,8 @@ public abstract class Ticket extends Service implements CRUD {
 						jsonNameList.add(this.getName());
 						jsonPhoneNumberList.add(this.getPhoneNumber());
 						jsonMemberIdList.add(this.getMemberID());
-
+						//jsonEmailList.add(this.getEmail());
+						System.out.println("email: " + this.getEmail());
 						// tickets.put("ticket", ticket);
 						// ticketsJsonArray.add(ticket);
 					}

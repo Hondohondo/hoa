@@ -65,9 +65,9 @@ public class TicketSelectGetAll extends Ticket{
 			JsonObject ticket = new JsonObject();
 			ticket.put("ticketId", jsonTicketIdList.get(index));
 			ticket.put("subject", jsonSubjectList.get(index));
-			ticket.put("ticketMessage", jsonMessageList.get(index));
+			//ticket.put("ticketMessage", jsonMessageList.get(index));
 			ticket.put("isActive", jsonIsActiveList.get(index));
-			ticket.put("createdBy", jsonCreatedByList.get(index));
+			//ticket.put("createdBy", jsonCreatedByList.get(index));
 			ticket.put("createdDate", jsonCreatedDateList.get(index));
 			ticket.put("name", jsonNameList.get(index));
 			ticket.put("phoneNumber", jsonPhoneNumberList.get(index));

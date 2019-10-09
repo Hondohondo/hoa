@@ -16,6 +16,7 @@ import hoa.api.services.ticket.microservices.ticket_crud_service.Ticket;
 import hoa.api.services.ticket.microservices.ticket_crud_service.TicketCRUDService_CRUDFactory;
 import hoa.api.services.ticket.microservices.ticket_crud_service.TicketCRUDService_Constants;
 import hoa.api.services.ticket.microservices.ticket_crud_service.create.TicketInsert;
+import hoa.api.services.ticket.microservices.ticket_crud_service.update.TicketUpdate;
 
 /**
  * </br>All new request maps must have the following comments:
@@ -80,17 +81,26 @@ public final class ApiController {
 	@CrossOrigin()
 	public /*@ResponseBody*/ String insertNew (
 							 @RequestBody TicketInsert ticket
-//							 @RequestParam(value="subject", required=false) @RequestBody String subject,
-//							 @RequestParam(value="ticketMessage", required=false) String ticketMessage,
-//							 @RequestParam(value="isActive", required=false) boolean isActive,
-//							 @RequestParam(value="createdBy", required=false) String createdBy,
-//							 @RequestParam(value="name", required=false) String name,
-//							 @RequestParam(value="phoneNumber", required=false) String phoneNumber,
-//							 @RequestParam(value="email", required=false) String email,
-//							 @RequestParam(value="memberId", required=false) String memberId
 							 ) {
 		System.out.println("Subject = " + ticket.subject);
 		return new TicketCRUDService_CRUDFactory().init(ticket.subject, ticket.message, ticket.isActive, ticket.name, ticket.phoneNumber, ticket.email, ticket.memberID);
+	}
+	
+	/**
+	 * </br>SERVICE: ticket/microservices/ticket_crud_service/
+	 * </br>TYPE: PUT
+	 * </br>DESCRIPTION: Update an existing ticket.
+	 * </br>@param id
+	 * </br>@return
+	 */
+	@RequestMapping(method = RequestMethod.PUT, value = TicketCRUDService_Constants.UPDATE)
+	@ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
+	@CrossOrigin()
+	public /*@ResponseBody*/ String updateExisting (
+							 @RequestBody TicketUpdate ticket
+							 ) {
+		System.out.println("Update on ticket = " + ticket.ticketId + ticket.message);
+		return new TicketCRUDService_CRUDFactory().init(ticket.ticketId, ticket.message, ticket.isActive);
 	}
 	
 	

@@ -4,6 +4,8 @@ public enum Services {
 	
 	TicketInsert,
 	TicketSelect,
-	TicketGetAll;
+	TicketGetAll,
+	TicketUpdate,
+	TicketDelete;
 
 }

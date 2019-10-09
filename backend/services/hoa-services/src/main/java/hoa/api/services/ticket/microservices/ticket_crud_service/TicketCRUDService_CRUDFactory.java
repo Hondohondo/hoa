@@ -5,6 +5,7 @@ import com.github.cliftonlabs.json_simple.Jsoner;
 import hoa.api.services.Services;
 import hoa.api.services.ticket.microservices.CRUDService_CRUDFactory;
 import hoa.api.services.ticket.microservices.ticket_crud_service.read.TicketSelectGetAll;
+import hoa.api.services.ticket.microservices.ticket_crud_service.update.TicketUpdate;
 import hoa.api.services.ticket.microservices.ticket_crud_service.create.TicketInsert;
 import hoa.api.services.ticket.microservices.ticket_crud_service.read.TicketSelect;
 
@@ -33,5 +34,13 @@ public class TicketCRUDService_CRUDFactory extends CRUDService_CRUDFactory{
 		System.out.println("factory: " + json);
 		return json;
 	}
+	
+	public String init(int ticketId, String ticketMessage, boolean isActive) {
+		TicketUpdate ticketUpdate = new TicketUpdate(ticketId, ticketMessage, isActive);
+		String json = /*(Jsoner.serialize(*/ticketUpdate.toJson(Services.TicketUpdate)/*)*/;
+		System.out.println("factory: " + json);
+		return json;
+	}
+
 
 }
