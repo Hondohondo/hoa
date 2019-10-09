@@ -1,27 +1,16 @@
 package hoa.api.services.ticket.microservices.ticket_crud_service;
 
-import java.io.IOException;
-import java.io.StringWriter;
-import java.io.Writer;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Observer;
-import java.util.Stack;
 
-import org.json.simple.JSONArray;
-
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.cliftonlabs.json_simple.JsonObject;
-import com.github.cliftonlabs.json_simple.Jsonable;
 
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
@@ -29,7 +18,6 @@ import hoa.api.services.Service;
 import hoa.api.services.CRUD;
 import hoa.api.services.ServiceConstants;
 import hoa.api.services.SqlOperationType;
-import hoa.api.services.ticket.microservices.ticket_crud_service.read.TicketSelect;
 
 /**
  * Returns a Ticket object. Jsonable is similar to Serializable for Java Beans,
@@ -116,7 +104,7 @@ public abstract class Ticket extends Service implements CRUD {
 //		}
 		else if (this.getOperation().equals(SqlOperationType.insert)) {
 			return executeQueryInsert();
-		} else if(this.getOperation().equals(SqlOperationType.update)) {
+		} else if(this.getOperation().equals(SqlOperationType.update) || this.getOperation().equals(SqlOperationType.delete)) {
 			return executeQueryInsert();
 		}
 		
@@ -337,8 +325,6 @@ public abstract class Ticket extends Service implements CRUD {
 			System.out.println("Connected.");
 			PreparedStatement statement = connection.prepareStatement(sql);
 			statement.executeUpdate();
-			status = "ticket insert successful.";
-
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
