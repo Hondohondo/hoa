@@ -9,6 +9,7 @@ export class Ticket {
     isActive: boolean;
     ticketId: number;
     memberId: number;
+    message: string;
 
     constructor(data:Ticket|Object){
         Object.assign(this,data);

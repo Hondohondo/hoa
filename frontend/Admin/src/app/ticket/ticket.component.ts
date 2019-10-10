@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HOAService } from '../hoa.service';
 import { Ticket } from '../Ticket';
 import { TicketPost } from '../TicketPost';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-ticket',
@@ -12,6 +14,8 @@ export class TicketComponent implements OnInit {
 
   tickets: Ticket[];
   headers = ["ticketId", "name", "subject", "createdDate"];
+  intakeForm: FormGroup;
+  isOpen : boolean = false;
 
   ticket: TicketPost = {
     ticketMessage:'',
@@ -21,10 +25,18 @@ export class TicketComponent implements OnInit {
     name:''
   }
 
-  constructor(public HOAService : HOAService) { }
+  constructor(public HOAService : HOAService, private fb: FormBuilder) {
+    this.intakeForm = fb.group({
+      ticketMessage: ['', Validators.required],
+      subject: ['', Validators.required],
+      email:['', Validators.required],
+      phoneNumber:['', Validators.required],
+      name:['', Validators.required]
+    })
+   }
 
   ngOnInit() {
-    this.getAllTickets();
+    
   }
 
   getAllTickets(){
@@ -37,11 +49,17 @@ export class TicketComponent implements OnInit {
   }
 
   addNewTicket(){
-    this.ticket.ticketMessage ='';
-    this.ticket.email='';
-    this.ticket.name='';
-    this.ticket.subject='';
-    this.ticket.phoneNumber=''; 
-    this.HOAService.addTicket(this.ticket);
+    // this.ticket.ticketMessage = this.ticketMessage.value;
+    // this.ticket.email='';
+    // this.ticket.name='';
+    // this.ticket.subject='';
+    // this.ticket.phoneNumber=''; 
+    // this.HOAService.addTicket(this.ticket);
+    this.HOAService.addTicket(this.intakeForm.value)
+    .subscribe(data => {
+      console.log(data);
+      this.intakeForm.reset();
+    });
+    console.warn(this.intakeForm.value);
   }
 }

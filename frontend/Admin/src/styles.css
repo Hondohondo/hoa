@@ -1,5 +1,3 @@
-/* You can add global styles to this file, and also import other style files */
-
 *,
 *::after,
 *::before {
@@ -26,7 +24,7 @@ body {
     padding: 3rem;
 }
 
-.header {
+.ms-header {
     /* background-color: #444; */
     padding: 0 5rem;
     height: 10rem;
@@ -35,17 +33,24 @@ body {
     position: relative;
 }
 
-.header__logo-box {
+.ms-header__logo-box {
     position: absolute;
     top: 4rem;
     left: 4rem;
 }
 
-.header__logo {
+.ms-header__logo {
     height: 3.5rem;
 }
 
-.nav {
+
+/*
+=====================
+ --- ALL LINKS ---
+=====================
+  */
+
+.ms-nav {
     /* position: absolute;
   top: 4rem;
   right: 4rem; */
@@ -53,24 +58,33 @@ body {
     margin-top: 4rem;
 }
 
-.nav-logout,
-.nav-user {
+.ms-nav-logout,
+.ms-nav-user {
     color: #f7f7f7;
     text-transform: uppercase;
     font-size: 1.6rem;
     text-decoration: none;
     /*   padding-left: 5rem;*/
+    transition: all 0.2s;
 }
 
-.nav-logout {
+.ms-nav-logout:hover,
+.ms-nav-user:active,
+.ms-nav-logout:active,
+.ms-nav-user:hover {
+    transform: translateY(-2px);
+    text-shadow: 0 0.7rem 1rem black;
+}
+
+.ms-nav-logout {
     margin-right: 3rem;
 }
 
-.nav-user span {
+.ms-nav-user span {
     /* vertical-align: middle; */
 }
 
-.user-img {
+.ms-user-img {
     height: 3.5rem;
     width: 3.5rem;
     /* margin-top: -2.5rem; */
@@ -79,18 +93,18 @@ body {
     vertical-align: middle;
 }
 
-.section-about {
+.ms-section-about {
     background-color: #f7f7f7;
     padding: 25rem 0;
 }
 
-.main {
+.ms-main {
     background-color: #f7f7f7;
     padding: 8rem 6rem;
     position: relative;
 }
 
-.login-form {
+.ms-login-form {
     margin: 0 auto;
     max-width: 55rem;
     background-color: #fff;
@@ -99,7 +113,7 @@ body {
     border-radius: 5px;
 }
 
-.heading-secondary {
+.ms-heading-secondary {
     font-size: 2.25rem;
     text-transform: uppercase;
     font-weight: 700;
@@ -112,22 +126,22 @@ body {
     display: inline-block;
 }
 
-.ma-bt-lg {
+.ms-ma-bt-lg {
     margin-bottom: 3.5rem !important;
 }
 
-.form__group:not(:last-child) {
+.ms-form__group:not(:last-child) {
     margin-bottom: 2.5rem;
 }
 
-.form__label {
+.ms-form__label {
     display: block;
     font-size: 1.6rem;
     font-weight: 700;
     margin-bottom: 0.75rem;
 }
 
-.form__input {
+.ms-form__input {
     display: block;
     font-family: inherit;
     font-size: 1.5rem;
@@ -148,16 +162,16 @@ body {
       Also needs -ms- */
 }
 
-.form__input:focus {
+.ms-form__input:focus {
     outline: none;
     border-bottom: 3px solid #55c57a;
 }
 
-.form__input:focus:invalid {
+.ms-form__input:focus:invalid {
     border-bottom: 3px solid #ff7730;
 }
 
-.form__input::-webkit-input-placeholder {
+.ms-form__input::-webkit-input-placeholder {
     color: #bbb;
 }
 
@@ -168,13 +182,94 @@ textarea {
 
 /*
 =====================
+ --- ADMIN PAGE ---
+=====================
+  */
+
+.ms-admin-view {
+    background-color: #fff;
+    max-width: 120rem;
+    margin: 0 auto;
+    /*    min-height: 100vh;*/
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: 0 2.5rem 8rem 2rem rgba(0, 0, 0, 0.07);
+}
+
+.ms-admin-view__menu {
+    background-image: linear-gradient(to right bottom, #7dd56f, #28b487);
+    /*    padding: 4rem 0;*/
+    /*    width: 32rem;*/
+    /*    padding-top: 4rem;*/
+    /*    min-height: 110vh;*/
+    /*    height: 100vh;*/
+}
+
+.ms-side-nav {
+    list-style: none;
+    /*    height: 100vh;*/
+}
+
+.ms-side-nav li {
+    display: inline-block;
+    margin: 1rem 0;
+    border-left: 0 solid #fff;
+    transition: all 0.3s;
+}
+
+.ms-side-nav--active,
+.ms-side-nav li:hover {
+    border-left: 4px solid #fff !important;
+}
+
+.ms-side-nav--active a {
+    transform: translateX(-3px);
+}
+
+
+/*
+to try to fix the problem - still doesnt work
+.side-nav--active a:hover {
+    transform: translateX(-9px);
+}
+*/
+
+.ms-side-nav a:link,
+.ms-side-nav a:visited {
+    display: flex;
+    /*I only need this for the transformation of side-nav--active to work ??I dont know why*/
+    padding: 1rem 4rem;
+    color: #fff;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    font-weight: 400;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.ms-side-nav a:hover,
+.ms-side-nav a:active {
+    -webkit-transform: translateX(3px);
+    transform: translateX(3px);
+}
+
+.ms-side-nav .ion-icon {
+    height: 1.9rem;
+    width: 1.9rem;
+    fill: #f7f7f7;
+    margin-right: 2rem;
+}
+
+
+/*
+=====================
  --- BUTTONS ---
 =====================
   */
 
-.btn,
-.btn:link,
-.btn:visited {
+.ms-btn,
+.ms-btn:link,
+.ms-btn:visited {
     font-size: 1.6rem;
     padding: 1.4rem 3rem;
     border-radius: 10rem;
@@ -192,40 +287,40 @@ textarea {
     cursor: pointer;
 }
 
-.btn:hover {
+.ms-btn:hover {
     -webkit-transform: translateY(-3px);
     transform: translateY(-3px);
     -webkit-box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
 }
 
-.btn:active {
+.ms-btn:active {
     -webkit-transform: translateY(-1px);
     transform: translateY(-1px);
     -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 }
 
-.btn:focus {
+.ms-btn:focus {
     outline: none;
     background-color: #2e864b;
 }
 
-.btn--white {
+.ms-btn--white {
     background-color: #fff;
     color: #777;
 }
 
-.btn--white::after {
+.ms-btn--white::after {
     background-color: #fff;
 }
 
-.btn--green {
+.ms-btn--green {
     background-color: #55c57a;
     color: #fff;
 }
 
-.btn--green::after {
+.ms-btn--green::after {
     background-color: #55c57a;
 }
 
@@ -236,8 +331,8 @@ textarea {
 =====================
   */
 
-.btn:link,
-.btn:visited {
+.ms-btn:link,
+.ms-btn:visited {
     text-transform: uppercase;
     text-decoration: none;
     padding: 1.5rem 4rem;
@@ -248,22 +343,22 @@ textarea {
     font-size: 1.6rem;
 }
 
-.btn:hover {
+.ms-btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
 }
 
-.btn:hover::after {
+.ms-btn:hover::after {
     transform: scaleX(1.5) scaleY(1.6);
     opacity: 0;
 }
 
-.btn:active {
+.ms-btn:active {
     transform: translateY(-1px);
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
 }
 
-.btn--white {
+.ms-btn--white {
     background-color: #fff;
     color: #777;
 }
@@ -275,8 +370,8 @@ textarea {
   =====================
     */
 
-.btn-text:link,
-.btn-text:visited {
+.ms-btn-text:link,
+.ms-btn-text:visited {
     font-size: 1.6rem;
     color: #55c57a;
     display: inline-block;
@@ -286,14 +381,14 @@ textarea {
     transition: all .2s;
 }
 
-.btn-text:hover {
+.ms-btn-text:hover {
     background-color: #55c57a;
     color: #fff;
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
     transform: translateY(-2px);
 }
 
-.btn-text:active {
+.ms-btn-text:active {
     box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.15);
     transform: translateY(0);
 }
@@ -305,52 +400,49 @@ textarea {
 =====================
   */
 
-
-/* .row {
+.ms-row {
     max-width: 114rem;
     margin: 0 auto;
 }
 
-.row:not(:last-child) {
+.ms-row:not(:last-child) {
     margin-bottom: 8rem;
 }
 
-.row::after {
+.ms-row::after {
     content: "";
     display: table;
     clear: both;
 }
 
-.row [class^="col-"] {
+.ms-row [class^="col-"] {
     float: left;
 }
 
-.row [class^="col-"]:not(:last-child) {
+.ms-row [class^="col-"]:not(:last-child) {
     margin-right: 6rem;
 }
 
-.row .col-1-of-2 {
+.ms-row .col-1-of-2 {
     width: calc( (100% - 6rem) / 2);
 }
 
-.row .col-1-of-3 {
+.ms-row .col-1-of-3 {
     width: calc( (100% - 2 * 6rem) / 3);
 }
 
-.row .col-2-of-3 {
+.ms-row .col-2-of-3 {
     width: calc( 2 * ((100% - 2 * 6rem) / 3) + 6rem);
 }
 
-.row .col-1-of-4 {
+.ms-row .col-1-of-4 {
     width: calc( (100% - 3 * 6rem) / 4);
 }
 
-.row .col-2-of-4 {
+.ms-row .col-2-of-4 {
     width: calc( 2 * ((100% - 3 * 6rem) / 4) + 6rem);
 }
 
-.row .col-3-of-4 {
+.ms-row .col-3-of-4 {
     width: calc( 3 * ((100% - 3 * 6rem) / 4) + 2 * 6rem);
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */

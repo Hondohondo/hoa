@@ -12,6 +12,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PipeTransform, Pipe } from '@angular/core';
 import { KeysPipe } from './keys.pipe';
 import { AdminComponent } from './admin/admin.component';
+import { ReactiveFormsModule, FormsModule, Validators } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+
 //import { FlatpickrModule } from 'angularx-flatpickr';
 
 @NgModule({
@@ -29,6 +33,9 @@ import { AdminComponent } from './admin/admin.component';
     AppRoutingModule,
     AlertModule.forRoot(),
     BrowserAnimationsModule,
+    ReactiveFormsModule,
+    FormsModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
