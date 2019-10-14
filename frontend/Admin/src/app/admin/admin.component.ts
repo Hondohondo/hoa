@@ -91,9 +91,10 @@ export class AdminComponent implements OnInit {
     this.HOAService.updateTicket(this.ticketUpdate)
       .subscribe(data => {
         console.log(data);
-        this.modalTicketId.reset();
-        this.modalService.dismissAll();
       });
+      this.modalForm.reset();
+      this.modalService.dismissAll();
+    alert("Your ticket is now updated!");
     console.warn(this.modalForm.value);
   };
 
