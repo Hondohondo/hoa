@@ -60,6 +60,7 @@ export class TicketComponent implements OnInit {
       console.log(data);
       this.intakeForm.reset();
     });
+    alert("Thanks for submitting a ticket!");
     console.warn(this.intakeForm.value);
   }
 }

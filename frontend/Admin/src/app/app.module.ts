@@ -14,6 +14,8 @@ import { KeysPipe } from './keys.pipe';
 import { AdminComponent } from './admin/admin.component';
 import { ReactiveFormsModule, FormsModule, Validators } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AlertComponent } from './_auth_components/alert.component';
+import { LoginComponent } from './login/login.component';
 
 
 //import { FlatpickrModule } from 'angularx-flatpickr';
@@ -26,6 +28,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ForumComponent,
     KeysPipe,
     AdminComponent,
+    AlertComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

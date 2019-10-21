@@ -20,7 +20,7 @@ export class AdminComponent implements OnInit {
   ticketData: Ticket;
   ticketUpdate: Ticket;
 
-  modalRef:NgbModalRef;
+  modalRef: NgbModalRef;
 
   modalTicketName: any;
   modalTicketId: any;
@@ -30,7 +30,7 @@ export class AdminComponent implements OnInit {
   modalIsActive: any;
   modalTicketPhoneNumber: any;
 
-  headers = ["ticketId", "createdDate", "name", "subject"];
+  headers = ["ticketId", "createdDate", "name", "subject", "isActive"];
 
   constructor(public HOAService: HOAService, private modalService: NgbModal, private fb: FormBuilder) {
     this.modalForm = fb.group({
@@ -81,19 +81,19 @@ export class AdminComponent implements OnInit {
   }
 
   open(content) {
-    this.modalRef=this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
+    this.modalRef = this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
   };
 
   sendUpdate() {
-    this.ticketUpdate=this.modalForm.value;
-    this.ticketUpdate.ticketId=this.modalTicketId;
+    this.ticketUpdate = this.modalForm.value;
+    this.ticketUpdate.ticketId = this.modalTicketId;
     console.log(this.ticketUpdate);
     this.HOAService.updateTicket(this.ticketUpdate)
       .subscribe(data => {
         console.log(data);
       });
-      this.modalForm.reset();
-      this.modalService.dismissAll();
+    this.modalForm.reset();
+    this.modalService.dismissAll();
     alert("Your ticket is now updated!");
     console.warn(this.modalForm.value);
   };
