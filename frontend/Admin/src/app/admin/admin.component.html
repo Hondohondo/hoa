@@ -33,18 +33,59 @@
         <form [formGroup]="modalForm">
             <div class="form-group">
                 <div class="row">
-                    <div class="col-sm-6 col-lg-6 col-md-6 modal-field" id="ticketId" name="ticketId">{{modalTicketId}}</div>
-                    <div class="col-sm-6 col-lg-6 col-md-6 modal-field" id="ticketDate">{{modalTicketDate}}</div>
+                    <!-- <div class="col-sm-6 col-lg-6 col-md-6 modal-field" id="ticketId" name="ticketId">{{modalTicketId}}</div>
+                    <div class="col-sm-6 col-lg-6 col-md-6 modal-field" id="ticketDate">{{modalTicketDate}}</div> -->
+                    
+                    <div class="ms-row">
+                        <div class="cool-1-of-2">
+                             
+                                <div class="col-sm-6 col-lg-6 col-md-6 modal-field" id="ticketId" name="ticketId"><strong>No:</strong>    {{modalTicketId}}</div>
+                        </div>
+                        <div class="cool-1-of-2">
+                         
+                                <div class="col-sm-6 col-lg-6 col-md-6 modal-field" id="ticketDate"><strong>Time:</strong>   {{modalTicketDate}}</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-6 col-lg-6 col-md-6 field-head">CLIENT NAME</div>
-                    <div class="col-sm-6 col-lg-6 col-md-6 field-head">PHONE NUMBER</div>
+                    <!-- <div class="col-sm-6 col-lg-6 col-md-6 field-head">CLIENT NAME</div>
+                    <div class="col-sm-6 col-lg-6 col-md-6 field-head">PHONE NUMBER</div> -->
+                    <div class="ms-row">
+                        <div class="cool-1-of-2">
+                             <div class="col-sm-6 col-lg-6 col-md-6 field-head">Client name</div>
+                            <div class="col-sm-6 col-lg-6 col-md-6 modal-field" id="ticketName">{{modalTicketName}}</div>
+
+                        </div>
+                        <div class="cool-1-of-2">
+                             <div class="col-sm-6 col-lg-6 col-md-6 field-head">Phone number</div>
+                            <div class="col-sm-6 col-lg-6 col-md-6 modal-field" id="ticketPhone">{{modalTicketPhoneNumber}}</div>
+
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-6 col-lg-6 col-md-6 modal-field" id="ticketName">{{modalTicketName}}</div>
-                    <div class="col-sm-6 col-lg-6 col-md-6 modal-field" id="ticketPhone">{{modalTicketPhoneNumber}}</div>
+                    <!-- <div class="col-sm-6 col-lg-6 col-md-6 modal-field" id="ticketName">{{modalTicketName}}</div>
+                    <div class="col-sm-6 col-lg-6 col-md-6 modal-field" id="ticketPhone">{{modalTicketPhoneNumber}}</div> -->
+                    <div class="ms-row">
+                        <div class="cool-1-of-2">
+                             <div class="col-sm-6 col-lg-6 col-md-6 field-head">Subject</div>
+                             <div class="col-sm-6 col-lg-6 col-md-6 modal-field" id="ticketSubject">{{modalTicketSubject}}</div>
+
+                        </div>
+                        <div class="cool-1-of-2">
+                           <div class="col-sm-6 col-lg-6 col-md-6 field-head">Active State</div>
+                              <div class="col-sm-6 col-lg-6 col-md-6 modal-field">
+                        <select class="form-control" id="isActive" name="isActive" formControlName="isActive" required>
+                            <option value="true" selected disabled>Select Ticket Status</option>
+                            <option value="false">false</option>
+                            <option value="true">true</option>
+                        </select>
+                    </div>
+
+                        </div>
+                    </div>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-sm-6 col-lg-6 col-md-6 field-head">SUBJECT</div>
                     <div class="col-sm-6 col-lg-6 col-md-6 field-head">ACTIVE STATE</div>
                 </div>
@@ -57,15 +98,15 @@
                             <option value="true">true</option>
                         </select>
                     </div>
-                </div>
+                </div> -->
                 <div class="row">
-                    <div class="col-sm-6 col-lg-6 col-md-6 field-head">TICKET MESSAGE</div>
+                    <div class="col-sm-6 col-lg-6 col-md-6 field-head">Ticket Message</div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12 col-lg-12 col-md-12 modal-field">{{modalTicketMessage}}</div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-6 col-lg-6 col-md-6 field-head">APPEND NEW MESSAGE HERE</div>
+                    <div class="col-sm-6 col-lg-6 col-md-6 field-head">Append new message here</div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12 col-lg-12 col-md-12" style="padding:0;">
@@ -76,7 +117,20 @@
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="sendDelete()">Delete</button>
-        <button type="button" class="btn btn-outline-dark" (click)="sendUpdate()">Update</button>
+            <div class="ms-row">
+                    <div class="cool-1-of-4">
+                          <!-- <button type="button" id="delete-btn" class="btn btn-outline-dark" (click)="sendDelete()">Delete</button> -->
+
+                          <button type="button" id="update-btn" class="btn btn-outline-dark" (click)="sendUpdate()">Update</button>
+
+                    </div>
+                    <div class="cool-1-of-4">
+                         <!-- <button type="button" id="update-btn" class="btn btn-outline-dark" (click)="sendUpdate()">Update</button> -->
+                         <button type="button" id="delete-btn" class="btn btn-outline-dark" (click)="sendDelete()">Delete</button>
+
+                    </div>
+                </div>
+        <!-- <button type="button" class="btn btn-outline-dark" (click)="sendDelete()">Delete</button>
+        <button type="button" class="btn btn-outline-dark" (click)="sendUpdate()">Update</button> -->
     </div>
 </ng-template>
