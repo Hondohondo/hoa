@@ -8,7 +8,7 @@
 <table id="ticketTable">
     <thead>
         <!-- <th *ngFor='let head of tickets | keys'>{{head}}</th> -->
-        <th *ngFor="let column of headers">{{column}}</th>
+        <th *ngFor="let column of headers"><div class="table-header-fonts">{{column}}</div></th>
     </thead>
     <tbody class="tableBody">
         <tr *ngFor="let ticket of tickets" (click)="getTicketInfo(content,ticket)">
@@ -16,7 +16,7 @@
                 {{tickets[list].ticketMessage}}
             </td> -->
             <td *ngFor="let column of headers">
-                {{ticket[column]}}
+                <div class="table-font">{{ticket[column]}}</div>
             </td>
         </tr>
     </tbody>

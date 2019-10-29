@@ -80,3 +80,12 @@
 .modal-field {
     font-size: 18px;
 }
+
+.table-header-fonts{
+    font-size:1.5rem;
+    font-weight:400;
+}
+
+.table-font{
+    font-size:1.4rem;
+}
