@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -17,6 +17,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AlertComponent } from './_auth_components/alert.component';
 import { LoginComponent } from './login/login.component';
 import { NavComponent } from './nav/nav.component';
+import { JwtInterceptor } from '../app/_auth_helpers/jwt.interceptor';
+import { ErrorInterceptor } from '../app/_auth_helpers/error.interceptor';
+import { fakeBackendProvider } from '../app/_auth_helpers/fake-backend';
 
 
 //import { FlatpickrModule } from 'angularx-flatpickr';
@@ -43,7 +46,11 @@ import { NavComponent } from './nav/nav.component';
     FormsModule,
     NgbModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    fakeBackendProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

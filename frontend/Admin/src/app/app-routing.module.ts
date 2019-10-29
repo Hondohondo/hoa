@@ -7,16 +7,18 @@ import { ForumComponent } from './forum/forum.component';
 import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './_auth_helpers/auth.guard';
+import { Role } from './_auth_models/Role';
 
 const routes: Routes = [
-  // { path: '', component: HomeComponent, canActivate: [AuthGuard] },
-  {path: 'home', component: HomeComponent},
-  {path: '', redirectTo: '/home', pathMatch: 'full'},
-  {path: 'ticket', component: TicketComponent},
-  {path: 'forum', component: ForumComponent},
-  {path: 'admin', component:AdminComponent},
-  {path: 'login', component:LoginComponent}
+  {path: '', component: HomeComponent, canActivate: [AuthGuard]},
+  {path: 'ticket', component: TicketComponent, canActivate: [AuthGuard]},
+  {path: 'forum', component: ForumComponent, canActivate: [AuthGuard]},
+  {path: 'admin', component:AdminComponent, canActivate: [AuthGuard], data: {roles: [Role.Admin]}},
+  {path: 'login', component:LoginComponent},
+  {path: '**', redirectTo:''}
 ]
+
+export const appRoutingModule = RouterModule.forRoot(routes);
 
 @NgModule({
   declarations: [],

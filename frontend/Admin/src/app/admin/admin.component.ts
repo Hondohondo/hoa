@@ -5,7 +5,11 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NgbModal, ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { first } from 'rxjs/operators';
 import { resolve } from 'url';
+
+import { Member } from '../_auth_models/Member';
+import { UserService } from '../_auth_services/user.service';
 
 @Component({
   selector: 'app-admin',
@@ -20,6 +24,9 @@ export class AdminComponent implements OnInit {
   ticketData: Ticket;
   ticketUpdate: Ticket;
 
+  loading = false;
+  users: Member[] = [];
+
   modalRef: NgbModalRef;
 
   modalTicketName: any;
@@ -32,7 +39,8 @@ export class AdminComponent implements OnInit {
 
   headers = ["ticketId", "createdDate", "name", "subject", "isActive"];
 
-  constructor(public HOAService: HOAService, private modalService: NgbModal, private fb: FormBuilder) {
+  constructor(public HOAService: HOAService, private modalService: NgbModal, private fb: FormBuilder,
+    private userService: UserService) {
     this.modalForm = fb.group({
       ticketMessage: ['', Validators.required],
       isActive: ['', Validators.required],
@@ -41,6 +49,11 @@ export class AdminComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loading = true;
+        this.userService.getAll().pipe(first()).subscribe(users => {
+            this.loading = false;
+            this.users = users;
+      });
     this.getAllTickets();
   }
 
