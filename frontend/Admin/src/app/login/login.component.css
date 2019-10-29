@@ -1,0 +1,13 @@
+.font-2-rem{
+    font-size:2rem;
+}
+
+.login-input{
+    font-size:1.5rem;
+    height: 4rem;
+}
+
+.card-header{
+    background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.801), rgba(40, 180, 133, 0.801));
+    color:white;
+}
