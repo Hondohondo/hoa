@@ -190,6 +190,7 @@ textarea {
     background-color: #fff;
     max-width: 120rem;
     margin: 0 auto;
+    margin-bottom:1rem;
     /*    min-height: 100vh;*/
     border-radius: 3px;
     overflow: hidden;
