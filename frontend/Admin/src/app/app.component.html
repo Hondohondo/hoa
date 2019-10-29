@@ -8,7 +8,7 @@
 
         <a class="ms-nav-user" href="#">
             <img class="ms-user-img" src="../assets/user.jpg" alt="Photo of User">
-            <span>Admin One</span>
+            <span>{{currentUser.firstName}} {{currentUser.lastName}}</span>
         </a>
     </nav>
 
@@ -40,7 +40,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" routerLink='/admin' routerLinkActive='ms-side-nav--active'>
+                    <a href="#" routerLink='/admin' routerLinkActive='ms-side-nav--active' *ngIf='isAdmin'>
                         <!-- <ion-icon name="ios-person" class="ion-icon"></ion-icon> -->
                         Admin
                     </a>

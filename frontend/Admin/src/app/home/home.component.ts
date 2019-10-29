@@ -12,7 +12,7 @@ import { AuthenticationService } from '../_auth_services/authentication.service'
 export class HomeComponent implements OnInit {
   loading = false;
   currentUser: Member;
-  userFromApi: Member[] = [];
+  userFromApi: Member;
 
   constructor(private userSerive: UserService, private authenticationService: AuthenticationService) {
     this.currentUser = this.authenticationService.currentUserValue;
@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-    this.userSerive.getAll().pipe(first()).subscribe(
+    this.userSerive.getById(this.currentUser.id).pipe(first()).subscribe(
       user=>{
         this.loading = false;
         this.userFromApi = user;
