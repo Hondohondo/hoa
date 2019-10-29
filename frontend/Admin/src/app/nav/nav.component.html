@@ -1,0 +1,57 @@
+<header class="ms-header">
+    <div class="ms-header__logo-box">
+        <img src="../assets/sample-logo.png" alt="Logo" class="ms-header__logo">
+    </div>
+
+    <nav class="ms-nav">
+        <a class="ms-nav-logout" href="#">Log out</a>
+
+        <a class="ms-nav-user" href="#">
+            <img class="ms-user-img" src="../assets/user.jpg" alt="Photo of User">
+            <span>Admin One</span>
+        </a>
+    </nav>
+
+</header>
+
+
+
+<main class="ms-main">
+
+    <div class="ms-admin-view">
+        <nav class="ms-admin-view__menu">
+            <ul class="ms-side-nav">
+                <li>
+                    <a href="#" routerLink='/home' routerLinkActive='ms-side-nav--active'>
+                        <!-- <ion-icon name="ios-home" class="ion-icon"></ion-icon> -->
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="#" routerLink='/forum' routerLinkActive='ms-side-nav--active'>
+                        <!-- <ion-icon name="ios-chatboxes" class="ion-icon"></ion-icon> -->
+                        Forum
+                    </a>
+                </li>
+                <li>
+                    <a href="#" routerLink='/ticket' routerLinkActive='ms-side-nav--active'>
+                        <!-- <ion-icon name="ios-list-box" class="ion-icon"></ion-icon> -->
+                        Ticket
+                    </a>
+                </li>
+                <li>
+                    <a href="#" routerLink='/admin' routerLinkActive='ms-side-nav--active'>
+                        <!-- <ion-icon name="ios-person" class="ion-icon"></ion-icon> -->
+                        Admin
+                    </a>
+                </li>
+            </ul>
+
+        </nav>
+        <div class="ms-admin-view__content">
+            <!--                <div class="line">&nbsp;</div>-->
+        </div>
+
+    </div>
+
+</main>
