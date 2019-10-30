@@ -500,7 +500,8 @@ to try to fix the problem - still doesnt work
 
 .composition__photo:hover {
     /* outline: 1.5rem solid $color-primary; */
-    outline: .25rem solid #01415c;
+    /* outline: .25rem solid #6b9912; */
+    outline: .25rem solid #55c57a;
     transform: scale(1.05) translateY(-.5rem);
     box-shadow: 0 2.5rem 4rem rgba(#000, .5);
 
@@ -702,5 +703,13 @@ select option {
 .margin-top2 {
     margin-top: 2rem;
 }
+
+.home-footer {
+    color: #777;
+    text-align: center;
+    font-size: 1.5rem;
+    /* margin-top: 2.5rem; */
+}
+
    
 
