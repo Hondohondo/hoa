@@ -109,7 +109,8 @@ body {
 
 .ms-login-form {
     margin: 0 auto;
-    max-width: 55rem;
+    /* max-width: 55rem; */
+    max-width: 95rem;
     background-color: #fff;
     box-shadow: 0 2.5rem 8rem 2rem rgba(0, 0, 0, 0.06);
     padding: 5rem 7rem;
@@ -175,6 +176,10 @@ body {
     box-sizing: border-box;
     /* Pseudo element (a visible thing that isn't really in the DOM).
       Also needs -ms- */
+}
+
+.small-input {
+    width: 75%;
 }
 
 .ms-form__input:focus {
@@ -425,6 +430,12 @@ to try to fix the problem - still doesnt work
     margin-bottom: 1.5rem;
 }
 
+.ms-roow {
+     max-width: 114rem;
+    margin: 0 auto;
+    width: 100%;
+}
+
 .ms-row:not(:last-child) {
     margin-bottom: 8rem;
 }
@@ -469,6 +480,46 @@ to try to fix the problem - still doesnt work
 
 
 
+
+/*
+=====================
+  Home Page
+=====================
+  */
+
+.composition__photo {
+    width: 100%;
+    box-shadow: 0 1.5rem 4rem rgba(#000, .4);
+    border-radius: 2px;
+    /* vertical-align: middle; */
+    /* margin: 3rem auto; */
+    transition: all .2s;
+    outline-offset: 2rem;
+
+}
+
+.composition__photo:hover {
+    /* outline: 1.5rem solid $color-primary; */
+    outline: .25rem solid #01415c;
+    transform: scale(1.05) translateY(-.5rem);
+    box-shadow: 0 2.5rem 4rem rgba(#000, .5);
+
+}
+
+.ms-section-about {
+    /* background-color:  #f7f7f7; */
+    padding: 8rem 2rem;
+    color: #777;
+}
+
+.paragraph {
+    font-size: 1.6rem;
+    margin-bottom: 3rem;
+}
+
+.ticket-link {
+    font-size: 1.6rem;
+}
 
 /*
 =====================
@@ -642,6 +693,14 @@ select option {
 
 #delete-btn::after {
     background-color: #550200;
+}
+
+.margin-top {
+    margin-top: 1rem;
+}
+
+.margin-top2 {
+    margin-top: 2rem;
 }
    
 
