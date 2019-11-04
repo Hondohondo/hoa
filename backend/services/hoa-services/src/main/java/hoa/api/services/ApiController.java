@@ -141,7 +141,7 @@ public final class ApiController {
 	@CrossOrigin()
 	public /* @ResponseBody */ String validate(@RequestBody AllUsersVerify personVerify) {
 		System.out.println("Person = " + personVerify.id);
-		return new Basic_AuthFactory().init(personVerify.id, personVerify.password);
+		return new Basic_AuthFactory().init(personVerify.username, personVerify.password);
 	}
 
 }

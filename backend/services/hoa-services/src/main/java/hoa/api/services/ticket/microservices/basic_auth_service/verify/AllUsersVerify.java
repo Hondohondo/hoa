@@ -16,9 +16,9 @@ public class AllUsersVerify extends AllUsers{
 	
 	public AllUsersVerify() {};
 	
-	public AllUsersVerify(int id, String password) {
+	public AllUsersVerify(String username, String password) {
 		super(SqlOperationType.select);
-		this.setId(id);
+		this.setUsername(username);
 		this.setPassword(password);
 		super.queryDb();
 	}
@@ -45,7 +45,7 @@ public class AllUsersVerify extends AllUsers{
 	@Override
 	protected String getQuery() {
 		// TODO Auto-generated method stub
-		return "SELECT * FROM ALL_USERS WHERE UID = " + this.getId() + " AND Password = '" + this.getPassword() + "';";
+		return "SELECT * FROM ALL_USERS WHERE Username = " + this.getUsername() + " AND Password = '" + this.getPassword() + "';";
 	}
 
 
