@@ -6,6 +6,7 @@ public enum Services {
 	TicketSelect,
 	TicketGetAll,
 	TicketUpdate,
-	TicketDelete;
+	TicketDelete,
+	BasicAuthVerify;
 
 }

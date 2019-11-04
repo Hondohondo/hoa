@@ -6,6 +6,6 @@ public enum SqlOperationType {
 	select,
 	select_get_all,
 	update,
-	delete
+	delete;
 
 }

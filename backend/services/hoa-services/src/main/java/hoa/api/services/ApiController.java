@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import hoa.api.services.ticket.microservices.CRUDService_CRUDFactory;
+import hoa.api.services.ticket.microservices.basic_auth_service.Basic_AuthFactory;
+import hoa.api.services.ticket.microservices.basic_auth_service.Basic_AuthServiceConstants;
+import hoa.api.services.ticket.microservices.basic_auth_service.AllUsers;
+import hoa.api.services.ticket.microservices.basic_auth_service.verify.AllUsersVerify;
 import hoa.api.services.ticket.microservices.ticket_crud_service.Ticket;
 import hoa.api.services.ticket.microservices.ticket_crud_service.TicketCRUDService_CRUDFactory;
 import hoa.api.services.ticket.microservices.ticket_crud_service.TicketCRUDService_Constants;
@@ -102,7 +106,7 @@ public final class ApiController {
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.PUT, value = TicketCRUDService_Constants.UPDATE)
-	@ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
+	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@CrossOrigin()
 	public /* @ResponseBody */ String updateExisting(@RequestBody TicketUpdate ticket) {
 		System.out.println("Update on ticket = " + ticket.ticketId + ticket.message);
@@ -118,10 +122,26 @@ public final class ApiController {
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.DELETE, value = TicketCRUDService_Constants.UPDATE)
-	@ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
+	@ResponseStatus(HttpStatus.OK)
 	@CrossOrigin()
 	public String deleteByTicketId(@RequestParam(value = "id") int id) {
 		return new TicketCRUDService_CRUDFactory().init(id, id);
+	}
+	
+	/**
+	 * </br>
+	 * SERVICE: basic_auth/verify </br>
+	 * TYPE: POST </br>
+	 * DESCRIPTION: Verify if a user exists and return their data if so.</br>
+	 * @param id </br>
+	 * @return
+	 */
+	@RequestMapping(method = RequestMethod.POST, value = Basic_AuthServiceConstants.BASIC_AUTH)
+	@ResponseStatus(HttpStatus.CREATED)
+	@CrossOrigin()
+	public /* @ResponseBody */ String validate(@RequestBody AllUsersVerify personVerify) {
+		System.out.println("Person = " + personVerify.id);
+		return new Basic_AuthFactory().init(personVerify.id, personVerify.password);
 	}
 
 }
