@@ -21,17 +21,28 @@ export class AuthenticationService {
     }
 
     login(username: string, password: string) {
-        return this.http.post<any>(`${environment.apiUrl}/users/authen`, { username, password })
-            .pipe(map(user => {
-                // login successful if there's a jwt token in the response
-                if (user && user.token) {
-                    // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify(user));
-                    this.currentUserSubject.next(user);
-                }
+        // return this.http.post<any>(`${environment.apiUrl}/users/authen`, { username, password })
+        //     .pipe(map(user => {
+        //         // login successful if there's a jwt token in the response
+        //         if (user && user.token) {
+        //             // store user details and jwt token in local storage to keep user logged in between page refreshes
+        //             localStorage.setItem('currentUser', JSON.stringify(user));
+        //             this.currentUserSubject.next(user);
+        //         }
 
-                return user;
-            }));
+        //         return user;
+        //     }));
+        return this.http.post<any>(`http://hoa.api.ngrok.io/services/basic_auth/`, { username, password })
+        .pipe(map(user => {
+            // login successful if there's a jwt token in the response
+            if (user && user.id) {
+                // store user details and jwt token in local storage to keep user logged in between page refreshes
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                this.currentUserSubject.next(user);
+            }
+
+            return user;
+        }));
     }
 
     logout() {

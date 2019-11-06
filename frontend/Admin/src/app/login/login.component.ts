@@ -1,3 +1,6 @@
+/**
+ * Handles functionality for LogIn Component.
+ */
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -10,12 +13,19 @@ import { AuthenticationService } from '../_auth_services/authentication.service'
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-    loginForm: FormGroup;
-    loading = false;
-    submitted = false;
-    returnUrl: string;
-    error = '';
+    loginForm: FormGroup; //login FormGroup, answers to submittions with inputs from elements in this group.
+    loading = false; //checks to see if page is loading.
+    submitted = false; //checks to see if loginForm has been submitted.
+    returnUrl: string; //used to route user after login action is completed.
+    error = ''; //string to represent error message.
 
+    /**
+     * 
+     * @param formBuilder Used to create LogIn FormGroup.
+     * @param route Used to reroute user based on actions after logging in.
+     * @param router Also used to reroute user.
+     * @param authenticationService reference to AuthenticationService
+     */
     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
@@ -28,6 +38,9 @@ export class LoginComponent implements OnInit {
         }
     }
 
+    /**
+     * Builds a loginForm using two input elements of username and password.
+     */
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
             username: ['', Validators.required],
@@ -41,6 +54,11 @@ export class LoginComponent implements OnInit {
     // convenience getter for easy access to form fields
     get f() { return this.loginForm.controls; }
 
+    /**
+     * Called when login button is clicked.
+     * Calls login from authenticationSerive and sends back the username and password to be validated by API.
+     * Once the promise is completed and user can be logged on, it will reroute user to '/' or this.returnURL which sends user to the home page.
+     */
     onSubmit() {
         this.submitted = true;
 

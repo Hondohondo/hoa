@@ -8,10 +8,16 @@ import{ environment } from '../../environments/environment';
 export class UserService {
     constructor(private http: HttpClient) { }
 
-    getAll() {
-        return this.http.get<Member[]>(`${environment.apiUrl}/users`);
+    // getAll() {
+    //     return this.http.get<Member[]>(`${environment.apiUrl}/users`);
+    // }
+    // getById(id: number) {
+    //     return this.http.get<Member>(`${environment.apiUrl}/users/${id}`);
+    // }
+    getById(id: number){
+        return this.http.get<Member>('http://danny-test.ngrok.io/services/basic_auth/by_id'+id);
     }
-    getById(id: number) {
-        return this.http.get<Member>(`${environment.apiUrl}/users/${id}`);
+    getAll(){
+        return this.http.get<Member[]>(`http://danny-test.ngrok.io/services/basic_auth/all`);
     }
 }

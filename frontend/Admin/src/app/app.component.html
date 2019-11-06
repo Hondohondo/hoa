@@ -1,6 +1,7 @@
+<!--Header that grabs the currentUser's firstName and lastName and uses data binding to make them appear in the header information.-->
 <header class="ms-header" *ngIf="currentUser">
     <div class="ms-header__logo-box">
-        <img src="../assets/sample-logo.png" alt="Logo" class="ms-header__logo">
+        <img src="../assets/sample-logo.png" alt="Logo" class="ms-header__logo" routerLink="/home">
     </div>
 
     <nav class="ms-nav">
@@ -15,7 +16,7 @@
 </header>
 
 
-
+<!--This is where the navigation bar's HTML is located.-->
 <main class="ms-main">
 
     <div class="ms-admin-view">
@@ -57,5 +58,6 @@
         </div>
 
     </div>
+    <!--Where the component's HTML will be inject into. Every components HTML will be shown under the navigation bar.-->
     <router-outlet></router-outlet>
 </main>

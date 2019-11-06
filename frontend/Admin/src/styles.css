@@ -1,3 +1,7 @@
+/*
+The main CSS page that all components inherit from.
+*/
+
 *,
 *::after,
 *::before {

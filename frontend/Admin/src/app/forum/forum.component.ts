@@ -1,3 +1,6 @@
+/**
+ * Where functionality for the forum page will go.
+ */
 import { Component, OnInit } from '@angular/core';
 
 @Component({

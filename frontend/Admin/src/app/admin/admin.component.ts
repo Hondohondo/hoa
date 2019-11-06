@@ -1,3 +1,6 @@
+/**
+ * Functionality for admin component goes here.
+ */
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { HOAService } from '../hoa.service';
 import { Ticket } from '../Ticket';
@@ -18,17 +21,20 @@ import { UserService } from '../_auth_services/user.service';
 })
 
 export class AdminComponent implements OnInit {
-  closeResult: string;
-  tickets: Ticket[];
-  modalForm: FormGroup;
-  ticketData: Ticket;
-  ticketUpdate: Ticket;
+  closeResult: string; //Holds message that is sent when modal is closed. Not currently used.
+  tickets: Ticket[]; //Holds all ticket objects for API.
+  modalForm: FormGroup; //modal intake formgroup
+  ticketData: Ticket; //Ticket object that will represent a more informative version of a selected ticket.
+  ticketUpdate: Ticket; //Ticket object that will be sent to API to update a ticket. 
 
   loading = false;
-  users: Member[] = [];
+  users: Member[] = []; //Holds information for the current user.
 
-  modalRef: NgbModalRef;
+  modalRef: NgbModalRef; //Reference object to the modal object, used to open and close the modal.
 
+  /**
+   * All Ticket fields for the modal.
+   */
   modalTicketName: any;
   modalTicketId: any;
   modalTicketDate: any;
@@ -37,8 +43,16 @@ export class AdminComponent implements OnInit {
   modalIsActive: any;
   modalTicketPhoneNumber: any;
 
+  //headers for the Admin ticket table.
   headers = ["ticketId", "createdDate", "name", "subject", "isActive"];
 
+/**
+ * Constructor creates a formgroup called modalForm that has three fields.
+ * @param HOAService -Service to access Ticket system requests to API
+ * @param modalService - Object that handles events and actions of the modal.
+ * @param fb - formbuilider that creates the modal intake form group.
+ * @param userService - Service object that gives access to Member API requests.
+ */
   constructor(public HOAService: HOAService, private modalService: NgbModal, private fb: FormBuilder,
     private userService: UserService) {
     this.modalForm = fb.group({
@@ -47,7 +61,11 @@ export class AdminComponent implements OnInit {
       ticketId: ['']
     })
   }
-
+  /**
+   * ngOnInit calls when the page is first loaded.
+   * Grabs the information for the current user.
+   * Also calls getAllTickets() which grabs all active tickets from the API to be used to create the Admin ticket table.
+   */
   ngOnInit() {
     this.loading = true;
         this.userService.getAll().pipe(first()).subscribe(users => {
@@ -56,7 +74,9 @@ export class AdminComponent implements OnInit {
       });
     this.getAllTickets();
   }
-
+  /**
+   * Method to grab all active tickets from the API and place these Ticket objects into the tickets array.
+   */
   getAllTickets() {
     this.HOAService.getAllTickets()
       .subscribe((data) => {
@@ -65,7 +85,9 @@ export class AdminComponent implements OnInit {
         //console.log(this.tickets);
       });
   };
-
+  /**
+   * Method to grab more details based on a given ticket id number. ticketData object holds the returned Ticket object.
+   */
   async getSelectedTicket(id: number) {
     this.HOAService.getTicketById(id).subscribe(data => {
       this.ticketData = <Ticket>data;
@@ -73,10 +95,18 @@ export class AdminComponent implements OnInit {
     });
     return;
   }
-
+  /**
+   * Not used. Does not do anything.
+   */
   fillModal() {
     this.modalTicketName = this.ticketData.name;
   }
+  /**
+   * Method used to set all fields of the modalForm based on the attributes of ticketData (the selected ticket object by id).
+   * Opens the modal using modalService.
+   * content - represents the element (modal)
+   * ticket - represents the ticket that is clicked on. Uses this ticket's id to grab more information about the ticket.
+   */
   async getTicketInfo(content, ticket: Ticket) {
     this.HOAService.getTicketById(ticket.ticketId).subscribe(data => {
       this.ticketData = data;
@@ -93,10 +123,20 @@ export class AdminComponent implements OnInit {
     })
   }
 
+  /**
+   * content- reference to the element modal.
+   * Used to open the modal.
+   */
   open(content) {
     this.modalRef = this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
   };
 
+  /**
+   * Method used to send back a ticket object to update the specifically selected ticket.
+   * Resets input fields in the modal. 
+   * Closes model after data is sent.
+   * Sends an alert to the user when a ticket is sent.
+   */
   sendUpdate() {
     this.ticketUpdate = this.modalForm.value;
     this.ticketUpdate.ticketId = this.modalTicketId;
@@ -111,6 +151,10 @@ export class AdminComponent implements OnInit {
     console.warn(this.modalForm.value);
   };
 
+  /**
+   * Method that sends back a ticket id for the selected ticket. This ticket will be deleted.
+   * Closes modal window when delete request is sent.
+   */
   sendDelete() {
     this.HOAService.deleteTicket(this.modalTicketId).subscribe();
     this.modalService.dismissAll();
