@@ -7,8 +7,8 @@ import hoa.api.services.ticket.microservices.basic_auth_service.verify.AllUsersV
 
 public class Basic_AuthFactory {
 	
-	public String init(String userName, String password) {
-		AllUsersVerify allUsersVerify = new AllUsersVerify(userName, password);
+	public String init(int id, String userName, String password) {
+		AllUsersVerify allUsersVerify = new AllUsersVerify(id, userName, password);
 		String json = allUsersVerify.toJson(Services.BasicAuthVerify);
 		System.out.println("Factory: " + json);
 		return Jsoner.prettyPrint(json);

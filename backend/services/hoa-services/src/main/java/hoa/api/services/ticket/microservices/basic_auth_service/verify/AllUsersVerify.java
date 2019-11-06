@@ -14,11 +14,28 @@ import hoa.api.services.ticket.microservices.basic_auth_service.AllUsers;
 
 public class AllUsersVerify extends AllUsers{
 	
-	public AllUsersVerify() {};
+	private boolean hasUsername, hasId;
+	public AllUsersVerify() {
+		hasUsername = false;
+		hasId = false;
+	};
 	
-	public AllUsersVerify(String username, String password) {
+	public AllUsersVerify(int id, String username, String password) {
 		super(SqlOperationType.select);
-		this.setUsername(username);
+		if(!username.isEmpty()) {
+			System.out.println(username);
+			this.setUsername(username);
+			hasUsername = true;
+			hasId = false;
+		} else {
+			hasId = true;
+			hasUsername = false;
+			this.setId(id);
+		}
+//		if(id != 0) {
+//			
+//		}
+		
 		this.setPassword(password);
 		super.queryDb();
 	}
@@ -33,6 +50,7 @@ public class AllUsersVerify extends AllUsers{
 		json.put("firstName", this.getFirstName());
 		json.put("lastName", this.getLastName());
 		json.put("role", this.getRole());
+		json.put("token", this.getId());
 		json.toJson(writer);
 	}
 
@@ -45,7 +63,15 @@ public class AllUsersVerify extends AllUsers{
 	@Override
 	protected String getQuery() {
 		// TODO Auto-generated method stub
-		return "SELECT * FROM ALL_USERS WHERE Username = " + this.getUsername() + " AND Password = '" + this.getPassword() + "';";
+		if(hasUsername) {
+			System.out.println("In getQuery():: " + this.getUsername());
+			return "SELECT * FROM ALL_USERS WHERE Username = '" + this.getUsername() + "' AND Password = '" + this.getPassword() + "';";
+		} else if(hasId) {
+			return "SELECT * FROM ALL_USERS WHERE UID = " + this.getId() + " AND Password = '" + this.getPassword() + "';";
+		} else {
+			return "";
+		}
+		
 	}
 
 

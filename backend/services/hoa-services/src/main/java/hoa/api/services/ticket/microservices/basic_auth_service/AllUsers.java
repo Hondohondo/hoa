@@ -15,7 +15,7 @@ import hoa.api.services.SqlOperationType;
 
 public abstract class AllUsers extends Service implements CRUD {
 
-	public int id;
+	public int id, token;
 	public String username, password, firstName, lastName, role;
 
 	private final String connectionString = ServiceConstants.CONNECTION_STRING;
@@ -67,6 +67,7 @@ public abstract class AllUsers extends Service implements CRUD {
 					status = "success.";
 					while (rs.next()) {
 						this.id = rs.getInt(AllUsersColumns.UID.toString());
+						this.token = this.id;
 						this.username = rs.getString(AllUsersColumns.Username.toString());
 						this.password = rs.getString(AllUsersColumns.Password.toString());
 						this.firstName = rs.getString(AllUsersColumns.FirstName.toString());
@@ -76,7 +77,7 @@ public abstract class AllUsers extends Service implements CRUD {
 
 				}
 			} catch (Exception ex) {
-				ex.printStackTrace();
+				System.out.println("USER NOT FOUND!");
 			}
 		}
 		return status;
@@ -100,6 +101,7 @@ public abstract class AllUsers extends Service implements CRUD {
 					status = "success.";
 					while (rs.next()) {
 						this.id = rs.getInt(AllUsersColumns.UID.toString());
+						this.token = this.id;
 						this.username = rs.getString(AllUsersColumns.Username.toString());
 						this.password = rs.getString(AllUsersColumns.Password.toString());
 						this.firstName = rs.getString(AllUsersColumns.FirstName.toString());
@@ -118,6 +120,22 @@ public abstract class AllUsers extends Service implements CRUD {
 	protected abstract ResultSet executeSql(PreparedStatement stmt);
 
 	protected abstract String getQuery();
+	
+	@JsonProperty("token")
+	/**
+	 * @return the id
+	 */
+	public int getToken() {
+		return id;
+	}
+
+	@JsonProperty("token")
+	/**
+	 * @param id the id to set
+	 */
+	public void setToken(int token) {
+		this.token = this.getId();
+	}
 
 	@JsonProperty("id")
 	/**
