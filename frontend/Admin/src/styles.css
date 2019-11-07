@@ -526,6 +526,25 @@ to try to fix the problem - still doesnt work
     font-size: 1.6rem;
 }
 
+
+.composition__photo--p2 {
+    width: 75%;
+}
+
+.align-right-color {
+    float: right;
+   
+}
+
+.align-right-color a{
+    
+    background-image: linear-gradient(to right, #03acf3, #01415c);
+    /* color: #0066cc !important; */
+    /* color: lightblue !important; */
+    opacity: 0.75;
+    border-radius: 5px;
+}
+
 /*
 =====================
   POP UP
