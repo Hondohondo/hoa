@@ -68,10 +68,6 @@ export class AdminComponent implements OnInit {
    */
   ngOnInit() {
     this.loading = true;
-        this.userService.getAll().pipe(first()).subscribe(users => {
-            this.loading = false;
-            this.users = users;
-      });
     this.getAllTickets();
   }
   /**
@@ -130,6 +126,10 @@ export class AdminComponent implements OnInit {
   open(content) {
     this.modalRef = this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
   };
+
+  close(content){
+    this.modalRef.close();
+  }
 
   /**
    * Method used to send back a ticket object to update the specifically selected ticket.

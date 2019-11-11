@@ -1,91 +1,95 @@
 <div class="row" style="margin-bottom:10px; margin-top:10px;">
-    <div class="col-lg-12 col-md-12 col-sm-12 text-right">
-        <button class="ms-btn ms-btn--green" id="button" (click)="getAllTickets()">Refresh</button>
-    </div>
+  <div class="col-lg-12 col-md-12 col-sm-12 text-right">
+    <button class="ms-btn ms-btn--green" id="button" (click)="getAllTickets()">Refresh</button>
+  </div>
 </div>
 
 
 <table id="ticketTable">
-    <thead>
-        <!-- <th *ngFor='let head of tickets | keys'>{{head}}</th> -->
-        <th *ngFor="let column of headers"><div class="table-header-fonts">{{column}}</div></th>
-    </thead>
-    <tbody class="tableBody">
-        <tr *ngFor="let ticket of tickets" (click)="getTicketInfo(content,ticket)">
-            <!-- <td *ngFor="let list of tickets | keys">
+  <thead>
+    <!-- <th *ngFor='let head of tickets | keys'>{{head}}</th> -->
+    <th *ngFor="let column of headers">
+      <div class="table-header-fonts">{{column}}</div>
+    </th>
+  </thead>
+  <tbody class="tableBody">
+    <tr *ngFor="let ticket of tickets" (click)="getTicketInfo(content,ticket)">
+      <!-- <td *ngFor="let list of tickets | keys">
                 {{tickets[list].ticketMessage}}
             </td> -->
-            <td *ngFor="let column of headers">
-                <div class="table-font">{{ticket[column]}}</div>
-            </td>
-        </tr>
-    </tbody>
+      <td *ngFor="let column of headers">
+        <div class="table-font">{{ticket[column]}}</div>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 <ng-template #content let-modal>
-    <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Ticket Information</h4>
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-        <form [formGroup]="modalForm">
-            <div class="form-group">
-                <div class="row">
-                    <!-- <div class="col-sm-6 col-lg-6 col-md-6 modal-field" id="ticketId" name="ticketId">{{modalTicketId}}</div>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Ticket Information</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="modalForm">
+      <div class="form-group">
+        <div class="row">
+          <!-- <div class="col-sm-6 col-lg-6 col-md-6 modal-field" id="ticketId" name="ticketId">{{modalTicketId}}</div>
                     <div class="col-sm-6 col-lg-6 col-md-6 modal-field" id="ticketDate">{{modalTicketDate}}</div> -->
-                    
-                    <div class="ms-row">
-                        <div class="cool-1-of-2">
-                             
-                                <div class="col-sm-6 col-lg-6 col-md-6 modal-field" id="ticketId" name="ticketId"><strong>No:</strong>    {{modalTicketId}}</div>
-                        </div>
-                        <div class="cool-1-of-2">
-                         
-                                <div class="col-sm-6 col-lg-6 col-md-6 modal-field" id="ticketDate"><strong>Time:</strong>   {{modalTicketDate}}</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <!-- <div class="col-sm-6 col-lg-6 col-md-6 field-head">CLIENT NAME</div>
+
+          <div class="ms-row">
+            <div class="cool-1-of-2">
+
+              <div class="col-sm-6 col-lg-6 col-md-6 modal-field" id="ticketId" name="ticketId"><strong>No:</strong>
+                {{modalTicketId}}</div>
+            </div>
+            <div class="cool-1-of-2">
+
+              <div class="col-sm-6 col-lg-6 col-md-6 modal-field" id="ticketDate"><strong>Time:</strong>
+                {{modalTicketDate}}</div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <!-- <div class="col-sm-6 col-lg-6 col-md-6 field-head">CLIENT NAME</div>
                     <div class="col-sm-6 col-lg-6 col-md-6 field-head">PHONE NUMBER</div> -->
-                    <div class="ms-row">
-                        <div class="cool-1-of-2">
-                             <div class="col-sm-6 col-lg-6 col-md-6 field-head">Client name</div>
-                            <div class="col-sm-6 col-lg-6 col-md-6 modal-field" id="ticketName">{{modalTicketName}}</div>
+          <div class="ms-row">
+            <div class="cool-1-of-2">
+              <div class="col-sm-6 col-lg-6 col-md-6 field-head">Client name</div>
+              <div class="col-sm-6 col-lg-6 col-md-6 modal-field" id="ticketName">{{modalTicketName}}</div>
 
-                        </div>
-                        <div class="cool-1-of-2">
-                             <div class="col-sm-6 col-lg-6 col-md-6 field-head">Phone number</div>
-                            <div class="col-sm-6 col-lg-6 col-md-6 modal-field" id="ticketPhone">{{modalTicketPhoneNumber}}</div>
+            </div>
+            <div class="cool-1-of-2">
+              <div class="col-sm-6 col-lg-6 col-md-6 field-head">Phone number</div>
+              <div class="col-sm-6 col-lg-6 col-md-6 modal-field" id="ticketPhone">{{modalTicketPhoneNumber}}</div>
 
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <!-- <div class="col-sm-6 col-lg-6 col-md-6 modal-field" id="ticketName">{{modalTicketName}}</div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <!-- <div class="col-sm-6 col-lg-6 col-md-6 modal-field" id="ticketName">{{modalTicketName}}</div>
                     <div class="col-sm-6 col-lg-6 col-md-6 modal-field" id="ticketPhone">{{modalTicketPhoneNumber}}</div> -->
-                    <div class="ms-row">
-                        <div class="cool-1-of-2">
-                             <div class="col-sm-6 col-lg-6 col-md-6 field-head">Subject</div>
-                             <div class="col-sm-6 col-lg-6 col-md-6 modal-field" id="ticketSubject">{{modalTicketSubject}}</div>
+          <div class="ms-row">
+            <div class="cool-1-of-2">
+              <div class="col-sm-6 col-lg-6 col-md-6 field-head">Subject</div>
+              <div class="col-sm-6 col-lg-6 col-md-6 modal-field" id="ticketSubject">{{modalTicketSubject}}</div>
 
-                        </div>
-                        <div class="cool-1-of-2">
-                           <div class="col-sm-6 col-lg-6 col-md-6 field-head">Active State</div>
-                              <div class="col-sm-6 col-lg-6 col-md-6 modal-field">
-                        <select class="form-control" id="isActive" name="isActive" formControlName="isActive" required>
-                            <option value="true" selected disabled>Select Ticket Status</option>
-                            <option value="false">false</option>
-                            <option value="true">true</option>
-                        </select>
-                    </div>
+            </div>
+            <div class="cool-1-of-2">
+              <div class="col-sm-6 col-lg-6 col-md-6 field-head">Active State</div>
+              <div class="col-sm-6 col-lg-6 col-md-6 modal-field">
+                <select class="form-control" id="isActive" name="isActive" formControlName="isActive" required>
+                  <option value="true" selected disabled>Select Ticket Status</option>
+                  <option value="false">false</option>
+                  <option value="true">true</option>
+                </select>
+              </div>
 
-                        </div>
-                    </div>
-                </div>
-                <!-- <div class="row">
+            </div>
+          </div>
+        </div>
+        <!-- <div class="row">
                     <div class="col-sm-6 col-lg-6 col-md-6 field-head">SUBJECT</div>
                     <div class="col-sm-6 col-lg-6 col-md-6 field-head">ACTIVE STATE</div>
                 </div>
@@ -99,42 +103,73 @@
                         </select>
                     </div>
                 </div> -->
-                <div class="row">
-                    <div class="col-sm-6 col-lg-6 col-md-6 field-head">Ticket Message</div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12 col-lg-12 col-md-12 modal-field">{{modalTicketMessage}}</div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6 col-lg-6 col-md-6 field-head">Append new message here</div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12 col-lg-12 col-md-12" style="padding:0;">
-                        <textarea class="ms-form__input" id="ticketMessage" type="text" name="message" placeholder="Your message" formControlName="ticketMessage" required></textarea>
-                    </div>
-                </div>
-            </div>
-        </form>
+        <div class="row">
+          <div class="col-sm-6 col-lg-6 col-md-6 field-head">Ticket Message</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-lg-12 col-md-12 modal-field">{{modalTicketMessage}}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 col-lg-6 col-md-6 field-head">Append new message here</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-lg-12 col-md-12" style="padding:0;">
+            <textarea class="ms-form__input" id="ticketMessage" type="text" name="message" placeholder="Your message"
+              formControlName="ticketMessage" required></textarea>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <div class="ms-row">
+      <div class="cool-1-of-4">
+        <!-- <button type="button" id="delete-btn" class="btn btn-outline-dark" (click)="sendDelete()">Delete</button> -->
+
+        <button type="button" id="update-btn" class="btn btn-outline-dark" (click)="sendUpdate()">Update</button>
+
+      </div>
+      <div class="cool-1-of-4">&nbsp;</div>
+      <div class="cool-1-of-4">&nbsp;</div>
+
+
+      <div class="cool-1-of-4">
+        <!-- <button type="button" id="update-btn" class="btn btn-outline-dark" (click)="sendUpdate()">Update</button> -->
+        <button type="button" id="delete-btn" class="btn btn-outline-dark" (click)="open(contentTwo)">Delete</button>
+
+      </div>
     </div>
-    <div class="modal-footer">
-            <div class="ms-row">
-                    <div class="cool-1-of-4">
-                          <!-- <button type="button" id="delete-btn" class="btn btn-outline-dark" (click)="sendDelete()">Delete</button> -->
-
-                          <button type="button" id="update-btn" class="btn btn-outline-dark" (click)="sendUpdate()">Update</button>
-
-                    </div>
-                    <div class="cool-1-of-4">&nbsp;</div>
-                    <div class="cool-1-of-4">&nbsp;</div>
-                   
-
-                    <div class="cool-1-of-4">
-                         <!-- <button type="button" id="update-btn" class="btn btn-outline-dark" (click)="sendUpdate()">Update</button> -->
-                         <button type="button" id="delete-btn" class="btn btn-outline-dark" (click)="sendDelete()">Delete</button>
-
-                    </div>
-                </div>
-        <!-- <button type="button" class="btn btn-outline-dark" (click)="sendDelete()">Delete</button>
+    <!-- <button type="button" class="btn btn-outline-dark" (click)="sendDelete()">Delete</button>
         <button type="button" class="btn btn-outline-dark" (click)="sendUpdate()">Update</button> -->
+  </div>
+</ng-template>
+
+<ng-template #contentTwo let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Are You Sure You Want To Delete The Ticket: {{modalTicketId}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="ms-row">
+      <div class="cool-1-of-4">
+        <!-- <button type="button" id="delete-btn" class="btn btn-outline-dark" (click)="sendDelete()">Delete</button> -->
+
+        <button type="button" id="update-btn" class="btn btn-outline-dark" (click)="close(contentTwo)">Cancel</button>
+
+      </div>
+      <div class="cool-1-of-4">&nbsp;</div>
+      <div class="cool-1-of-4">&nbsp;</div>
+
+
+      <div class="cool-1-of-4">
+        <!-- <button type="button" id="update-btn" class="btn btn-outline-dark" (click)="sendUpdate()">Update</button> -->
+        <button type="button" id="delete-btn" class="btn btn-outline-dark" (click)="sendDelete()">Delete</button>
+
+      </div>
     </div>
+  </div>
+  <div class="modal-footer">
+  </div>
 </ng-template>
