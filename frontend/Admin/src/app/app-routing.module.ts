@@ -19,6 +19,7 @@ import { Role } from './_auth_models/Role';
  */
 const routes: Routes = [
   {path: '', component: HomeComponent, canActivate: [AuthGuard]},
+  {path:'home', component: HomeComponent, canActivate:[AuthGuard]},
   {path: 'ticket', component: TicketComponent, canActivate: [AuthGuard]},
   {path: 'forum', component: ForumComponent, canActivate: [AuthGuard]},
   {path: 'admin', component:AdminComponent, canActivate: [AuthGuard], data: {roles: [Role.Admin]}},

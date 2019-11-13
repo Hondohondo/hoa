@@ -22,30 +22,30 @@
     <div class="ms-admin-view">
         <nav class="ms-admin-view__menu" *ngIf="currentUser">
             <ul class="ms-side-nav">
-                <li class="ms-side-nav--active">
+                <li>
                     <!-- <a href="#" routerLink='/home' routerLinkActive='ms-side-nav--active'> -->
-                    <a href="#" routerLink='/home'>
+                    <a href="#" routerLink='/home' routerLinkActive="ms-side-nav--active">
                         <!-- <ion-icon name="ios-home" class="ion-icon"></ion-icon> -->
                         <i class="icon ion-ios-home ion-icon"></i>Home
                     </a>
                 </li>
                 <li>
                     <!-- <a href="#" routerLink='/forum' routerLinkActive='ms-side-nav--active'> -->
-                    <a href="#" routerLink='/forum'>
+                    <a href="#" routerLink='/forum' routerLinkActive="ms-side-nav--active">
                         <!-- <ion-icon name="ios-chatboxes" class="ion-icon"></ion-icon> -->
                         <i class="icon ion-ios-chatboxes ion-icon"></i>Forum
                     </a>
                 </li>
                 <li>
                     <!-- <a href="#" routerLink='/ticket' routerLinkActive='ms-side-nav--active'> -->
-                    <a href="#" routerLink='/ticket'>
+                    <a href="#" routerLink='/ticket' routerLinkActive="ms-side-nav--active">
                         <!-- <ion-icon name="ios-list-box" class="ion-icon"></ion-icon> -->
                         <i class="icon ion-ios-list ion-icon"></i>Ticket
                     </a>
                 </li>
                 <li>
                     <!-- <a href="#" routerLink='/admin' routerLinkActive='ms-side-nav--active' *ngIf='isAdmin'> -->
-                    <a href="#" routerLink='/admin' *ngIf='isAdmin'>
+                    <a href="#" routerLink='/admin' *ngIf='isAdmin' routerLinkActive="ms-side-nav--active">
                         <!-- <ion-icon name="ios-person" class="ion-icon"></ion-icon> -->
                         <i class="icon ion-ios-person ion-icon"></i>Admin
                     </a>

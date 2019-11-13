@@ -1,7 +1,7 @@
 /**
  * Functionality for admin component goes here.
  */
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { HOAService } from '../hoa.service';
 import { Ticket } from '../Ticket';
 import { ScrollingModule } from '@angular/cdk/scrolling';
@@ -17,7 +17,7 @@ import { UserService } from '../_auth_services/user.service';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css']
+  styleUrls: ['./admin.component.css'],
 })
 
 export class AdminComponent implements OnInit {
@@ -54,7 +54,7 @@ export class AdminComponent implements OnInit {
  * @param userService - Service object that gives access to Member API requests.
  */
   constructor(public HOAService: HOAService, private modalService: NgbModal, private fb: FormBuilder,
-    private userService: UserService) {
+    private userService: UserService, private cd: ChangeDetectorRef) {
     this.modalForm = fb.group({
       ticketMessage: ['', Validators.required],
       isActive: ['', Validators.required],
@@ -144,6 +144,7 @@ export class AdminComponent implements OnInit {
     this.HOAService.updateTicket(this.ticketUpdate)
       .subscribe(data => {
         console.log(data);
+        this.getAllTickets();
       });
     this.modalForm.reset();
     this.modalService.dismissAll();
@@ -156,7 +157,10 @@ export class AdminComponent implements OnInit {
    * Closes modal window when delete request is sent.
    */
   sendDelete() {
-    this.HOAService.deleteTicket(this.modalTicketId).subscribe();
+    this.HOAService.deleteTicket(this.modalTicketId).subscribe(data=>{
+      this.getAllTickets();
+    }
+    );
     this.modalService.dismissAll();
   }
 }
