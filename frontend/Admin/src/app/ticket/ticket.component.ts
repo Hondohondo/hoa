@@ -19,6 +19,7 @@ export class TicketComponent implements OnInit {
   headers = ["ticketId", "name", "subject", "createdDate"]; //variable is used to create the table headers in the HTML for this component.
   intakeForm: FormGroup; //Represents the FormGroup used to send a ticket back to the API.
   isOpen : boolean = false; //Currently not used.
+  submitted = false; //checks to see if intakeform has been submitted.
 
   /**
    * A TicketPost object names ticket. Will be used to send a ticket back to API.
@@ -60,19 +61,24 @@ export class TicketComponent implements OnInit {
         console.log(this.tickets);
       });
   }
-
+  /**
+   * Returns an object reference to form group "Intake Form"
+   */
+  get f(){
+    return this.intakeForm.controls;
+  }
   /**
    * Methods calls the addTicket() from HOASerive with an the input as a value of the intakeForm.
    * After the ticket is send. The method resets all data fields in the intakeForms.
    * A alert is sent to the user to notify that the ticket is sent.
    */
   addNewTicket(){
-    // this.ticket.ticketMessage = this.ticketMessage.value;
-    // this.ticket.email='';
-    // this.ticket.name='';
-    // this.ticket.subject='';
-    // this.ticket.phoneNumber=''; 
-    // this.HOAService.addTicket(this.ticket);
+    this.submitted = true;
+    if(this.intakeForm.invalid){
+      alert("Please fill in all fields with the correct responses");
+      return;
+    }
+    if(this.intakeForm.invalid == false){
     this.HOAService.addTicket(this.intakeForm.value)
     .subscribe(data => {
       console.log(data);
@@ -81,4 +87,5 @@ export class TicketComponent implements OnInit {
     alert("Thanks for submitting a ticket!");
     console.warn(this.intakeForm.value);
   }
+}
 }

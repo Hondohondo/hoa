@@ -2,6 +2,10 @@
 The main CSS page that all components inherit from.
 */
 
+.asterik{
+    color:red;
+}
+
 *,
 *::after,
 *::before {
