@@ -90,3 +90,19 @@
 .table-font{
     font-size:1.4rem;
 }
+
+.modal-header-center {
+    /* position: absolute;
+width: 1140px;
+height: 70rem;
+top: 50%;
+left: 50%;
+-webkit-transform: translate(-50%, -50%);
+-ms-transform: translate(-50%, -50%);
+transform: translate(-50%, -50%);
+z-index: 999; */
+}
+
+.modal-content {
+    /* height: 25rem; */
+}

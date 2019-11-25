@@ -145,6 +145,8 @@
 </ng-template>
 
 <ng-template #contentTwo let-modal>
+
+<div class="modal-header-center">
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Are You Sure You Want To Delete The Ticket: {{modalTicketId}}</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -159,10 +161,8 @@
         <button type="button" id="update-btn" class="btn btn-outline-dark" (click)="close(contentTwo)">Cancel</button>
 
       </div>
+      <!-- <div class="cool-1-of-4">&nbsp;</div> -->
       <div class="cool-1-of-4">&nbsp;</div>
-      <div class="cool-1-of-4">&nbsp;</div>
-
-
       <div class="cool-1-of-4">
         <!-- <button type="button" id="update-btn" class="btn btn-outline-dark" (click)="sendUpdate()">Update</button> -->
         <button type="button" id="delete-btn" class="btn btn-outline-dark" (click)="sendDelete()">Delete</button>
@@ -170,6 +170,9 @@
       </div>
     </div>
   </div>
+</div>
+
+
   <div class="modal-footer">
   </div>
 </ng-template>
