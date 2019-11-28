@@ -17,6 +17,7 @@ public abstract class AllUsers extends Service implements CRUD {
 
 	public int id, token;
 	public String username, password, firstName, lastName, role;
+	public boolean unauthorized = false;
 
 	private final String connectionString = ServiceConstants.CONNECTION_STRING;
 	protected SqlOperationType operation;
@@ -77,6 +78,7 @@ public abstract class AllUsers extends Service implements CRUD {
 
 				}
 			} catch (Exception ex) {
+				unauthorized = true;
 				System.out.println("USER NOT FOUND!");
 			}
 		}

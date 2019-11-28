@@ -1,6 +1,7 @@
 package hoa.api.services;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -139,9 +140,21 @@ public final class ApiController {
 	@RequestMapping(method = RequestMethod.POST, value = Basic_AuthServiceConstants.BASIC_AUTH)
 	@ResponseStatus(HttpStatus.CREATED)
 	@CrossOrigin()
-	public /* @ResponseBody */ String validate(@RequestBody AllUsersVerify personVerify) {
+	public /* @ResponseBody */ ResponseEntity<String> validate(@RequestBody AllUsersVerify personVerify) {
 		System.out.println("Person = " + personVerify.id);
-		return new Basic_AuthFactory().init(personVerify.id, personVerify.username, personVerify.password);
+		Basic_AuthFactory baf = new Basic_AuthFactory();
+		String result = baf.init(personVerify.id, personVerify.username, personVerify.password);
+		if(baf.unauthorized) {
+			return new ResponseEntity<>(result, HttpStatus.UNAUTHORIZED);
+		}
+		return new ResponseEntity<>(result, HttpStatus.CREATED);
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = Basic_AuthServiceConstants.BASIC_AUTH+"/unauthorized")
+	@ResponseStatus(HttpStatus.UNAUTHORIZED)
+	@CrossOrigin()
+	public String validate(String result) {
+		return result;
 	}
 
 }
