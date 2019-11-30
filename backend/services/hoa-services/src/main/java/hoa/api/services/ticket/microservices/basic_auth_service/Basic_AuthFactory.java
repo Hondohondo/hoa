@@ -5,8 +5,14 @@ import com.github.cliftonlabs.json_simple.Jsoner;
 import hoa.api.services.Services;
 import hoa.api.services.ticket.microservices.basic_auth_service.verify.AllUsersVerify;
 
+/**
+ * Interfaces with API Controller to return a result of whether a user is valid or not
+ * @author nealk
+ *
+ */
 public class Basic_AuthFactory {
 	
+	//Stateful attribute for user validation. True = 401, False = 201
 	public boolean unauthorized = false;
 	
 	public String init(int id, String userName, String password) {

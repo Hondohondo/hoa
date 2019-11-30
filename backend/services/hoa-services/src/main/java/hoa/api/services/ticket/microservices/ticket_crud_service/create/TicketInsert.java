@@ -17,18 +17,21 @@ import hoa.api.services.ticket.microservices.ticket_crud_service.Ticket;
 import hoa.api.services.ticket.microservices.ticket_crud_service.TicketColumns;
 
 public class TicketInsert extends Ticket{
-
-//	protected TicketInsert(SqlOperationType operation) {
-//		super(operation);
-//		// TODO Auto-generated constructor stub
-//	}
 	
 	public TicketInsert() {
 		super(SqlOperationType.insert);
-		//super.queryDb();
 	}
 
-
+	/**
+	 * Inserts a Ticket
+	 * @param subject
+	 * @param ticketMessage
+	 * @param isActive
+	 * @param name
+	 * @param phoneNumber
+	 * @param email
+	 * @param memberId
+	 */
 	public TicketInsert(String subject, String ticketMessage, boolean isActive, String name, String phoneNumber,
 			String email, String memberId) {
 		// TODO Auto-generated constructor stub
@@ -46,6 +49,9 @@ public class TicketInsert extends Ticket{
 
 
 	@Override
+	/**
+	 * Executes the Statement
+	 */
 	protected ResultSet executeSql(PreparedStatement stmt) {
 		// TODO Auto-generated method stub
 		try {
@@ -58,6 +64,9 @@ public class TicketInsert extends Ticket{
 	}
 
 	@Override
+	/**
+	 * Returns the query String
+	 */
 	protected String getQuery() {
 		// TODO Auto-generated method stub
 		System.out.println(this.getSubject());
@@ -82,6 +91,9 @@ public class TicketInsert extends Ticket{
 	}
 
 	@Override
+	/**
+	 * Returns the Service name (for the registry)
+	 */
 	public Services getServiceName() {
 		// TODO Auto-generated method stub
 		return Services.TicketInsert;
@@ -89,6 +101,9 @@ public class TicketInsert extends Ticket{
 
 
 	@Override
+	/**
+	 * Writes the JSON output.
+	 */
 	public void toJson(Writer writer) throws IOException {
 		// TODO Auto-generated method stub
 		String status = "inserted.";//super.getStatus();

@@ -13,6 +13,11 @@ import hoa.api.services.Service;
 import hoa.api.services.ServiceConstants;
 import hoa.api.services.SqlOperationType;
 
+/**
+ * Represents the USER table in the Server. Attributes correspond to columns.
+ * @author nealk
+ *
+ */
 public abstract class AllUsers extends Service implements CRUD {
 
 	public int id, token;
@@ -35,6 +40,9 @@ public abstract class AllUsers extends Service implements CRUD {
 		return operation;
 	}
 
+	/**
+	 * Default queryDb() assumes Select operation type
+	 */
 	public final String queryDb() {
 		if (this.getOperation().equals(SqlOperationType.select)) {
 			return executeQuerySelect(this.getOperation());
@@ -50,6 +58,11 @@ public abstract class AllUsers extends Service implements CRUD {
 		return executeQuerySelect(this.getOperation());
 	}
 
+	/**
+	 * Executes a select operation with JDBC
+	 * @param operation
+	 * @return
+	 */
 	private String executeQuerySelect(SqlOperationType operation) {
 		// TODO Auto-generated method stub
 		String status = "";
@@ -85,6 +98,9 @@ public abstract class AllUsers extends Service implements CRUD {
 		return status;
 	}
 
+	/**
+	 * Executes a Generic (Select or Insert) operation with JDBC
+	 */
 	@Override
 	public final Object excuteQuery(SqlOperationType operation) {
 		String status = "";

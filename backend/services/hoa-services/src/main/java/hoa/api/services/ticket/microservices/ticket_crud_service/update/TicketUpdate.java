@@ -14,6 +14,11 @@ import hoa.api.services.Services;
 import hoa.api.services.SqlOperationType;
 import hoa.api.services.ticket.microservices.ticket_crud_service.Ticket;
 
+/**
+ * Updates a Ticket
+ * @author nealk
+ *
+ */
 public class TicketUpdate extends Ticket{
 
 	protected TicketUpdate() {
@@ -22,6 +27,12 @@ public class TicketUpdate extends Ticket{
 		super.queryDb();
 	}
 	
+	/**
+	 * Updates the ticket.
+	 * @param ticketId
+	 * @param ticketMessage
+	 * @param isActive
+	 */
 	public TicketUpdate(int ticketId, String ticketMessage, boolean isActive) {
 		super(SqlOperationType.update);
 		System.out.println("ticket message in update = " + ticketMessage);
@@ -32,6 +43,9 @@ public class TicketUpdate extends Ticket{
 	}
 
 	@Override
+	/**
+	 * Executes the Statement.
+	 */
 	protected ResultSet executeSql(PreparedStatement stmt) {
 		// TODO Auto-generated method stub
 		try {
@@ -45,6 +59,9 @@ public class TicketUpdate extends Ticket{
 	}
 
 	@Override
+	/**
+	 * Returns the query String back to the caller.
+	 */
 	protected String getQuery() {
 		// TODO Auto-generated method stub
 		//int isActive = (super.isActive == true) ? 1 : 0;
@@ -57,6 +74,9 @@ public class TicketUpdate extends Ticket{
 	}
 
 	@Override
+	/**
+	 * Writes the JSON back to the caller.
+	 */
 	public void toJson(Writer writer) throws IOException {
 		// TODO Auto-generated method stub
 		String status = "updated.";
@@ -66,6 +86,9 @@ public class TicketUpdate extends Ticket{
 	}
 
 	@Override
+	/**
+	 * Returns the service name to the caller.
+	 */
 	public Services getServiceName() {
 		// TODO Auto-generated method stub
 		return Services.TicketUpdate;

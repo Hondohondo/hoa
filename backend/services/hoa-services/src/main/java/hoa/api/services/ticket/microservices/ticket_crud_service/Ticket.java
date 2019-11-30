@@ -25,7 +25,6 @@ import hoa.api.services.SqlOperationType;
  * </br>
  * {@link #ticketId} = TicketID in UtilityDB.TICKET </br>
  * etc... </br>
- * TODO: Finish this class documentation.
  * 
  * @author Owner
  *
@@ -74,34 +73,15 @@ public abstract class Ticket extends Service implements CRUD {
 
 	protected Ticket(SqlOperationType operation) {
 		this.operation = operation;
-		// ticketTable = new Hashtable<SqlOperationType, Ticket>();
-		// ticketTable.put(SqlOperationType.select, new TicketSelect());
-		// queryDb();
 	}
 
-//	@Override
-//	public void toJson(Writer writer) throws IOException {
-//		// this.queryDb();
-//		final JsonObject json = new JsonObject();
-//		json.put("ticketId", this.getTicketId());
-//		json.put("subject", this.getSubject());
-//		json.put("message", this.getMessage());
-//		json.put("createdBy", this.getCreatedBy());
-//		json.put("createdDate", this.getCreatedDate());
-//		json.put("name", this.getName());
-//		json.put("phoneNumber", this.getPhoneNumber());
-//		json.put("email", this.getEmail());
-//		json.put("memberId", this.getMemberID());
-//		json.toJson(writer);
-//	}
-
+	/**
+	 * Queries DB based on the current Operation that's been set.
+	 */
 	public final String queryDb() {
 		if (this.getOperation().equals(SqlOperationType.select)) {
 			return executeQuerySelect(this.getOperation());
 		}
-//		else if(this.getOperation().equals(SqlOperationType.select_get_all)) {
-//			return executeQuerySelectGetAll();
-//		}
 		else if (this.getOperation().equals(SqlOperationType.insert)) {
 			return executeQueryInsert();
 		} else if(this.getOperation().equals(SqlOperationType.update) || this.getOperation().equals(SqlOperationType.delete)) {
@@ -111,6 +91,11 @@ public abstract class Ticket extends Service implements CRUD {
 		return executeQuerySelect(this.getOperation());
 	}
 	
+	/**
+	 * Queries DB with generic operation (select or insert)
+	 * @param operation
+	 * @return
+	 */
 	public final String queryDb(SqlOperationType operation) {
 		if (this.getOperation().equals(SqlOperationType.select)) {
 			return executeQuerySelect(this.getOperation());
@@ -122,8 +107,12 @@ public abstract class Ticket extends Service implements CRUD {
 	}
 
 	@Override
+	/**
+	 * Executes a JDBC query - mostly boilerplate code here
+	 * TODO: Refactor to Stratregy Pattern
+	 */
 	public final Object excuteQuery(SqlOperationType operation) {
-		if (this.getOperation().equals(SqlOperationType.select)) {
+		if (this.getOperation().equals(SqlOperationType.select)) {	//executes a regular select
 			final String sql = getQuery();
 			try {
 				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -159,7 +148,7 @@ public abstract class Ticket extends Service implements CRUD {
 				ex.printStackTrace();
 			}
 			return status;
-		} else if (this.getOperation().equals(SqlOperationType.select_get_all)) {
+		} else if (this.getOperation().equals(SqlOperationType.select_get_all)) {	//if it's a select -> getAll
 			final String sql = getQuery();
 			try {
 				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -199,6 +188,11 @@ public abstract class Ticket extends Service implements CRUD {
 		return "jdbc failure.";
 	}
 
+	/**
+	 * Executes a Select query.
+	 * @param operation
+	 * @return
+	 */
 	private String executeQuerySelect(SqlOperationType operation) {
 		// TODO Auto-generated method stub
 		if (this.getOperation().equals(SqlOperationType.select)) {

@@ -12,6 +12,11 @@ import hoa.api.services.Services;
 import hoa.api.services.SqlOperationType;
 import hoa.api.services.ticket.microservices.ticket_crud_service.Ticket;
 
+/**
+ * Deletes a Ticket
+ * @author nealk
+ *
+ */
 public class TicketDelete extends Ticket{
 
 	protected TicketDelete() {

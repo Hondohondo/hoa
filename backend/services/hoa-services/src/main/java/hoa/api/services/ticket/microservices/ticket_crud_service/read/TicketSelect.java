@@ -14,6 +14,10 @@ import hoa.api.services.ticket.microservices.ticket_crud_service.Ticket;
 
 public class TicketSelect extends Ticket{
 	
+	/**
+	 * Retrieves an individual ticket from the DB
+	 * @param ticketId
+	 */
 	public TicketSelect(int ticketId) {
 		super(SqlOperationType.select);
 		this.ticketId = ticketId;
@@ -33,6 +37,9 @@ public class TicketSelect extends Ticket{
 	}
 
 	@Override
+	/**
+	 * Returns the query String to the caller.
+	 */
 	protected String getQuery() {
 		// TODO Auto-generated method stub
 		return "SELECT * FROM Ticket WHERE TicketID = " + this.getTicketId();
@@ -46,6 +53,9 @@ public class TicketSelect extends Ticket{
 	}
 	
 	@Override
+	/**
+	 * Writes the JSON back for the caller.
+	 */
 	public void toJson(Writer writer) throws IOException {
 		// this.queryDb();
 		final JsonObject json = new JsonObject();

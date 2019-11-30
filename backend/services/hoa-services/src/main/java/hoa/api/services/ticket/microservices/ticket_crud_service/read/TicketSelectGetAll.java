@@ -16,11 +16,9 @@ import hoa.api.services.ticket.microservices.ticket_crud_service.Ticket;
 
 public class TicketSelectGetAll extends Ticket{
 	
-//	public TicketSelect(int ticketId) {
-//		this.ticketId = ticketId;
-//		this.subject = super.getSubject();
-//	}
-	
+	/**
+	 * Returns all Tickets in the DB
+	 */
 	public TicketSelectGetAll() {
 		super(SqlOperationType.select_get_all);
 		super.queryDb();

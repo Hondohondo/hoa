@@ -12,6 +12,11 @@ import hoa.api.services.Services;
 import hoa.api.services.SqlOperationType;
 import hoa.api.services.ticket.microservices.basic_auth_service.AllUsers;
 
+/**
+ * Verifies whether a user exists or not.
+ * @author nealk
+ *
+ */
 public class AllUsersVerify extends AllUsers{
 	
 	private boolean hasUsername, hasId;
@@ -20,6 +25,12 @@ public class AllUsersVerify extends AllUsers{
 		hasId = false;
 	};
 	
+	/**
+	 * Verifies if a user exisys
+	 * @param id
+	 * @param username
+	 * @param password
+	 */
 	public AllUsersVerify(int id, String username, String password) {
 		super(SqlOperationType.select);
 		if(!username.isEmpty()) {
@@ -32,15 +43,15 @@ public class AllUsersVerify extends AllUsers{
 			hasUsername = false;
 			this.setId(id);
 		}
-//		if(id != 0) {
-//			
-//		}
 		
 		this.setPassword(password);
 		super.queryDb();
 	}
 
 	@Override
+	/**
+	 * Builds the JSON response
+	 */
 	public void toJson(Writer writer) throws IOException {
 		// TODO Auto-generated method stub
 		final JsonObject json = new JsonObject();
@@ -55,12 +66,18 @@ public class AllUsersVerify extends AllUsers{
 	}
 
 	@Override
+	/**
+	 * For the Service registry
+	 */
 	public Services getServiceName() {
 		// TODO Auto-generated method stub
 		return Services.BasicAuthVerify;
 	}
 
 	@Override
+	/**
+	 * Returns the Query
+	 */
 	protected String getQuery() {
 		// TODO Auto-generated method stub
 		if(hasUsername) {
@@ -74,8 +91,9 @@ public class AllUsersVerify extends AllUsers{
 		
 	}
 
-
-
+	/**
+	 * Executes Statement with JDBC
+	 */
 	@Override
 	protected ResultSet executeSql(PreparedStatement stmt) {
 		// TODO Auto-generated method stub
