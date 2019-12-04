@@ -43,12 +43,14 @@ body {
 
 .ms-header__logo-box {
     position: absolute;
-    top: 4rem;
+    /* top: 4rem; */
+    top: 2rem;
     left: 4rem;
 }
 
 .ms-header__logo {
-    height: 3.5rem;
+    /* height: 3.5rem; */
+    height: 6.5rem;
 }
 
 
