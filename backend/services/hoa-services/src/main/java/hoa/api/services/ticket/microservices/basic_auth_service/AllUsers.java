@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
@@ -96,6 +98,17 @@ public abstract class AllUsers extends Service implements CRUD {
 			}
 		}
 		return status;
+	}
+	
+	/**
+	 * Decrypts the password.
+	 * @param encrypted
+	 * @return
+	 */
+	private String decryptPassword(String encrypted) {
+		StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
+    	encryptor.setPassword("mtairhoa");
+    	return encryptor.decrypt(encrypted);
 	}
 
 	/**

@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
+
 import com.github.cliftonlabs.json_simple.JsonObject;
 
 import hoa.api.services.Services;
@@ -82,13 +84,20 @@ public class AllUsersVerify extends AllUsers{
 		// TODO Auto-generated method stub
 		if(hasUsername) {
 			System.out.println("In getQuery():: " + this.getUsername());
-			return "SELECT * FROM ALL_USERS WHERE Username = '" + this.getUsername() + "' AND Password = '" + this.getPassword() + "';";
+			return "SELECT * FROM ALL_USERS WHERE Username = '" + this.getUsername() /*+ "' AND Password = '" + this.getPassword()*/ + "';";
 		} else if(hasId) {
-			return "SELECT * FROM ALL_USERS WHERE UID = " + this.getId() + " AND Password = '" + this.getPassword() + "';";
+			return "SELECT * FROM ALL_USERS WHERE UID = " + this.getId() /*+ " AND Password = '" + this.getPassword()*/ + "';";
 		} else {
 			return "";
 		}
 		
+	}
+	
+	private String encryptPassword(String plainText) {
+		String seed = "mtairhoa";
+    	StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
+    	encryptor.setPassword(seed);
+    	return encryptor.encrypt(plainText);
 	}
 
 	/**
