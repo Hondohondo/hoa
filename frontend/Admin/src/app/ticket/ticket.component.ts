@@ -15,22 +15,8 @@ import { Observable } from 'rxjs';
 })
 export class TicketComponent implements OnInit {
 
-  tickets: Ticket[]; //Holds an array of Ticket objects.
-  headers = ["ticketId", "name", "subject", "createdDate"]; //variable is used to create the table headers in the HTML for this component.
   intakeForm: FormGroup; //Represents the FormGroup used to send a ticket back to the API.
-  isOpen : boolean = false; //Currently not used.
   submitted = false; //checks to see if intakeform has been submitted.
-
-  /**
-   * A TicketPost object names ticket. Will be used to send a ticket back to API.
-   */
-  ticket: TicketPost = {
-    ticketMessage:'',
-    subject:'',
-    email:'',
-    phoneNumber:'',
-    name:''
-  }
 
   /**
    * Creates a formGroup using a FormBuilder, fb.
@@ -50,17 +36,6 @@ export class TicketComponent implements OnInit {
     
   }
 
-  /**
-   * Method calls getAllTickets() from HOAService class then grabs the API's JSON response and populates the tickets[] with the data.
-   */
-  getAllTickets(){
-    this.HOAService.getAllTickets()
-      .subscribe((data)=>{
-        console.log(data);
-        this.tickets=data['tickets'];
-        console.log(this.tickets);
-      });
-  }
   /**
    * Returns an object reference to form group "Intake Form"
    */

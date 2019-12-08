@@ -21,13 +21,12 @@ import { UserService } from '../_auth_services/user.service';
 })
 
 export class AdminComponent implements OnInit {
-  closeResult: string; //Holds message that is sent when modal is closed. Not currently used.
   tickets: Ticket[]; //Holds all ticket objects for API.
   modalForm: FormGroup; //modal intake formgroup
   ticketData: Ticket; //Ticket object that will represent a more informative version of a selected ticket.
   ticketUpdate: Ticket; //Ticket object that will be sent to API to update a ticket. 
 
-  loading = false;
+  loading = false;//keeps track of when the page is loaded on initialization of the page.
   users: Member[] = []; //Holds information for the current user.
 
   modalRef: NgbModalRef; //Reference object to the modal object, used to open and close the modal.
@@ -91,12 +90,7 @@ export class AdminComponent implements OnInit {
     });
     return;
   }
-  /**
-   * Not used. Does not do anything.
-   */
-  fillModal() {
-    this.modalTicketName = this.ticketData.name;
-  }
+  
   /**
    * Method used to set all fields of the modalForm based on the attributes of ticketData (the selected ticket object by id).
    * Opens the modal using modalService.
