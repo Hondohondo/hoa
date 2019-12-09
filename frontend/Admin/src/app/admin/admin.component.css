@@ -6,6 +6,13 @@
     margin-top: 30px;
 }
 
+.table-ticket {
+    /* width: 100%; */
+    height: 40rem;
+    /* overflow: scroll; */
+    overflow-y: scroll;
+}
+
 #ticketTable {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
