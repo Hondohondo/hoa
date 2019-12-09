@@ -3,13 +3,16 @@ import { Subscription } from 'rxjs';
 
 import { AlertService } from '../_auth_services/alert.service';
 
+/**
+ * Alert for showing error messages for log in component.
+ */
 @Component({ selector: 'alert', templateUrl: 'alert.component.html' })
 export class AlertComponent implements OnInit, OnDestroy {
     private subscription: Subscription;
     message: any;
 
     constructor(private alertService: AlertService) { }
-
+    //On initialization of component it shows a different css class based on the type of alert.
     ngOnInit() {
         this.subscription = this.alertService.getAlert()
             .subscribe(message => {
@@ -25,7 +28,7 @@ export class AlertComponent implements OnInit, OnDestroy {
                 this.message = message;
             });
     }
-
+    //unsubscribes from promise to stop memory leaks.
     ngOnDestroy() {
         this.subscription.unsubscribe();
     }

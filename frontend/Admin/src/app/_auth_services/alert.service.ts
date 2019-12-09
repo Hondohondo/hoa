@@ -21,16 +21,16 @@ export class AlertService {
             }
         });
     }
-
+    //Grabs the alert for a specific response from the API as an observable.
     getAlert(): Observable<any> {
         return this.subject.asObservable();
     }
-
+    //Success message
     success(message: string, keepAfterRouteChange = false) {
         this.keepAfterRouteChange = keepAfterRouteChange;
         this.subject.next({ type: 'success', text: message });
     }
-
+    //Error message
     error(message: string, keepAfterRouteChange = false) {
         this.keepAfterRouteChange = keepAfterRouteChange;
         this.subject.next({ type: 'error', text: message });

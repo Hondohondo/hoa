@@ -3,7 +3,9 @@ import { HttpClient } from '@angular/common/http';
 
 import { Member } from '../_auth_models/Member';
 import{ environment } from '../../environments/environment';
-
+/**
+ * This class is currently not in use.
+ */
 @Injectable({ providedIn: 'root' })
 export class UserService {
     constructor(private http: HttpClient) { }

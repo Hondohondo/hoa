@@ -5,6 +5,9 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { AuthenticationService } from '../_auth_services/authentication.service';
 
+/**
+ * Handles JWT tokens for user log in and current users. Sets token to current user.
+ */
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
     constructor(private authenticationService: AuthenticationService) { }

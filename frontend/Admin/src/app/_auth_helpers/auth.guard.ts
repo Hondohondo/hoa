@@ -3,6 +3,9 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
 
 import { AuthenticationService } from '../_auth_services/authentication.service';
 
+/**
+ * This class handles user-role interactions with pages. Only admins can see extra pages such as the admin page.
+ */
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
     constructor(
@@ -10,6 +13,7 @@ export class AuthGuard implements CanActivate {
         private authenticationService: AuthenticationService
     ) { }
 
+    //Grabs current user, checks route of the page if there is any role restriction if there is then it redirects to home page.
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const currentUser = this.authenticationService.currentUserValue;
         if (currentUser) {
